@@ -6,6 +6,7 @@
 #include "Ball.h"
 #include "Player.h"
 #include "MathUtilities.h"
+#include "Drawing.h"
 
 namespace pong
 {
@@ -43,6 +44,9 @@ namespace pong
             // player 2 (You)
             void UpdatePlayer2();
             void DrawPlayer2();
+
+            // game ui
+            void DrawPlayField();
 
             // helpers
             void DrawPlayerPaddle(Player& player);

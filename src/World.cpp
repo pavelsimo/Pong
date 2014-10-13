@@ -8,6 +8,7 @@ namespace pong
     const float BALL_WIDTH = 20;
     const float BALL_HEIGHT = 20;
     const float DRAG = 0.5;
+    const float LINE_WIDTH = 4;
 
     World::World()
     : m_width(640),
@@ -44,6 +45,7 @@ namespace pong
 
     void World::Draw()
     {
+        DrawPlayField();
         DrawBall();
         DrawPlayer1();
         DrawPlayer2();
@@ -187,12 +189,24 @@ namespace pong
         DrawPlayerPaddle(m_player2);
     }
 
+    // game ui
+    void World::DrawPlayField()
+    {
+        draw::DrawLine(
+            math::Vector2(m_width * 0.5f, 0),
+            math::Vector2(m_width * 0.5f, m_height),
+            draw::DASHED,
+            LINE_WIDTH
+        );
+    }
+
     // ==================
     // helpers
     // ==================
 
     void World::DrawQuad(float minX, float minY, float maxX, float maxY)
     {
+        glPushMatrix();
         glBegin( GL_QUADS );
             glColor3f(1.f, 1.f, 1.f); 
             glVertex2f(minX, minY);
@@ -200,6 +214,7 @@ namespace pong
             glVertex2f(maxX, maxY);
             glVertex2f(minX, maxY);
         glEnd();
+        glPopMatrix();
     }
 
     void World::DrawPlayerPaddle(Player& player)

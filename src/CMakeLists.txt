@@ -47,6 +47,7 @@ ADD_EXECUTABLE(
 	Paddle.cpp
 	Vector2.cpp
 	AABB2.cpp
+	Drawing.cpp
 	MathUtilities.cpp
 )
 
