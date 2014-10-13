@@ -68,7 +68,10 @@ namespace math
 
     bool AABB2::Intersects(const AABB2& aabb2) 
     {
-        return this->IsInside(aabb2.max) || this->IsInside(aabb2.min);
+        return ( max.x > aabb2.min.x ) 
+            && ( min.x < aabb2.max.x ) 
+            && ( max.y > aabb2.min.y ) 
+            && ( min.y < aabb2.max.y ); 
     }
 
     Vector2 AABB2::GetMax() const 

@@ -62,6 +62,11 @@ void OnKeyboardEvent(unsigned char key, int x, int y)
 
 }
 
+void OnMouseMoveEvent(int x, int y)
+{
+    g_world->OnMouseMove(x, y);
+}
+
 void GameLoop(int value)
 {
     Update();
@@ -91,6 +96,7 @@ int main(int argc, char** argv)
 
     glutDisplayFunc(Render);
     glutKeyboardFunc(OnKeyboardEvent);
+    glutPassiveMotionFunc(OnMouseMoveEvent);
     glutTimerFunc(1000 / SCREEN_FPS, GameLoop, 0);
     glutMainLoop();
 

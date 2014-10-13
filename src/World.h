@@ -20,6 +20,7 @@ namespace pong
             void Update();
             void OnKeyDown(unsigned char key);
             void OnKeyUp(unsigned char key);
+            void OnMouseMove(int x, int y);
             float GetWidth() const;
             float GetHeight() const;
             float GetLeft() const;
@@ -53,8 +54,8 @@ namespace pong
             Player m_player1;
             Player m_player2;
             math::Vector2 m_velBall;
+            math::Vector2 m_mousePos;
     };
 }
-
 
 #endif

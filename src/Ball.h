@@ -25,7 +25,7 @@ namespace pong
             float GetMaxX() const;
             float GetMaxY() const;
             math::Vector2 GetCenter() const;
-
+            math::AABB2 GetAABB2() const;
             private:
                 math::AABB2 m_aabb2;
                 float m_width;

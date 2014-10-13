@@ -77,4 +77,9 @@ namespace pong
     {
         return m_aabb2.GetCenter();
     }
+
+    math::AABB2 Ball::GetAABB2() const
+    {
+        return m_aabb2;
+    }
 }

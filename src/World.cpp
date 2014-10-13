@@ -2,11 +2,12 @@
 
 namespace pong
 {
+    const float BALL_SPEED = 4;
     const float PADDLE_WIDTH = 20;
     const float PADDLE_HEIGHT = 80;
     const float BALL_WIDTH = 20;
     const float BALL_HEIGHT = 20;
-    const float DRAG = 0.9999;
+    const float DRAG = 0.5;
 
     World::World()
     : m_width(640),
@@ -31,7 +32,7 @@ namespace pong
         PADDLE_WIDTH, 
         PADDLE_HEIGHT
       ),
-      m_velBall(math::Vector2(1.5, 1.5))
+      m_velBall(math::Vector2(BALL_SPEED, BALL_SPEED))
     {
 
     }
@@ -52,6 +53,7 @@ namespace pong
     {
         UpdateBall();
         UpdatePlayer1();
+        UpdatePlayer2();
     }
 
     void World::OnKeyDown(unsigned char key)
@@ -62,6 +64,12 @@ namespace pong
     void World::OnKeyUp(unsigned char key)
     {
         
+    }
+
+    void World::OnMouseMove(int x, int y)
+    {
+        m_mousePos.x = x;
+        m_mousePos.y = y;
     }
 
     float World::GetWidth() const
@@ -100,10 +108,20 @@ namespace pong
 
     void World::UpdateBall() 
     {
-        if(HasBallCollideBottom() || HasBallCollideBottom()) 
+        if(HasBallCollideBottom() || HasBallCollideTop()) 
         {
             m_velBall.y *= -1;
         }
+        
+        math::AABB2 player1AABB2 = m_player1.GetPaddle().GetAABB2();
+        math::AABB2 player2AABB2 = m_player2.GetPaddle().GetAABB2();
+        math::AABB2 ballAABB2 = m_ball.GetAABB2();
+
+        if(ballAABB2.Intersects(player1AABB2) || ballAABB2.Intersects(player2AABB2))
+        {
+            m_velBall.x *= -1;
+        }
+
         m_ball.Move(m_velBall);
     }
 
@@ -135,9 +153,7 @@ namespace pong
         math::Vector2 pandleCenter = m_player1.GetPaddle().GetCenter();
         math::Vector2 displacement = ballCenter - pandleCenter;
         displacement *= DRAG;
-        
         m_player1.MoveVertical(displacement.y, 0, m_height);
-        
     }
 
     void World::DrawPlayer1() 
@@ -158,6 +174,13 @@ namespace pong
     // ==================
     // Player 2
     // ==================
+
+    void World::UpdatePlayer2() 
+    {
+        math::Vector2 pandleCenter = m_player2.GetPaddle().GetCenter();
+        math::Vector2 displacement = m_mousePos - pandleCenter;
+        m_player2.MoveVertical(displacement.y, 0, m_height);
+    }
 
     void World::DrawPlayer2() 
     {
