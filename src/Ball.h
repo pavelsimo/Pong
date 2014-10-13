@@ -26,10 +26,10 @@ namespace pong
             float GetMaxY() const;
             math::Vector2 GetCenter() const;
             math::AABB2 GetAABB2() const;
-            private:
-                math::AABB2 m_aabb2;
-                float m_width;
-                float m_height;
+        private:
+            math::AABB2 m_aabb2;
+            float m_width;
+            float m_height;
     };
 
 }

@@ -4,10 +4,11 @@
 namespace pong
 {
     const float BALL_SPEED = 4;
-    const float PADDLE_WIDTH = 20;
-    const float PADDLE_HEIGHT = 80;
     const float BALL_WIDTH = 20;
     const float BALL_HEIGHT = 20;
+    const float PADDLE_WIDTH = 20;
+    const float PADDLE_HEIGHT = 80;
+
     const float DRAG = 0.5;
     const float LINE_WIDTH = 4;
 
@@ -58,6 +59,7 @@ namespace pong
         {
             glClear(GL_COLOR_BUFFER_BIT);
             DrawPlayField();
+            Restart();
         }
     }
 
@@ -223,7 +225,28 @@ namespace pong
 
     void World::Restart() 
     {
+        ChangeState(PLAYING);
         
+        m_ball = Ball(
+            m_width * 0.5f, 
+            m_height * 0.5f, 
+            BALL_WIDTH, 
+            BALL_HEIGHT
+        );
+
+        m_player1 = Player(
+            0, 
+            (m_height - PADDLE_HEIGHT) * 0.5f, 
+            PADDLE_WIDTH, 
+            PADDLE_HEIGHT
+        );
+
+        m_player2 = Player(
+            m_width - PADDLE_WIDTH, 
+            (m_height - PADDLE_HEIGHT) * 0.5f, 
+            PADDLE_WIDTH, 
+            PADDLE_HEIGHT
+        );
     }
 
     // ==================

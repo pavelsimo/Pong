@@ -15,8 +15,8 @@ void OnKeyboardEvent(unsigned char key, int x, int y);
 void OnKeyboardUpEvent(unsigned char key, int x, int y);
 void GameLoop(int value);
 
-pong::World* g_world;
-
+pong::World* g_world = nullptr;
+ 
 bool InitializeGL()
 {
     glViewport(0.f, 0.f, g_world->GetWidth(), g_world->GetHeight());
@@ -38,17 +38,13 @@ bool InitializeGL()
 
 bool LoadingMedia()
 {
-
-
     return true;
 }
 
 void Render()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-
     g_world->Draw();
-
     glutSwapBuffers();
 }
 
@@ -100,8 +96,11 @@ int main(int argc, char** argv)
     glutTimerFunc(1000 / SCREEN_FPS, GameLoop, 0);
     glutMainLoop();
 
-    delete g_world;
-    g_world = nullptr; 
+    if(g_world != nullptr)
+    {
+        delete g_world;
+        g_world = nullptr;    
+    }
 
     return 0;
 }
