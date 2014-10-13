@@ -19,10 +19,11 @@ pong::World* g_world;
 
 bool InitializeGL()
 {
-    glViewport(0.f, 0.f, SCREEN_WIDTH, SCREEN_HEIGHT);
+    glViewport(0.f, 0.f, g_world->GetWidth(), g_world->GetHeight());
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0.0, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0, 1.0, -1.0);
+    glOrtho(g_world->GetLeft(), g_world->GetRight(), 
+        g_world->GetBottom(), g_world->GetTop(), 1.0, -1.0);
     glMatrixMode(GL_MODELVIEW);
 
     GLenum error = glGetError();
@@ -76,6 +77,7 @@ int main(int argc, char** argv)
     glutInitDisplayMode(GLUT_DOUBLE);
     glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     glutCreateWindow("Pong");
+    glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION);
 
     if(!InitializeGL()) 
     {
@@ -91,6 +93,9 @@ int main(int argc, char** argv)
     glutKeyboardFunc(OnKeyboardEvent);
     glutTimerFunc(1000 / SCREEN_FPS, GameLoop, 0);
     glutMainLoop();
+
+    delete g_world;
+    g_world = nullptr; 
 
     return 0;
 }

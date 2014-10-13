@@ -52,4 +52,29 @@ namespace pong
     {
         return m_height;
     }
+
+    float Ball::GetMinX() const
+    {
+        return m_aabb2.min.x;
+    }
+
+    float Ball::GetMinY() const
+    {
+        return m_aabb2.min.y;
+    }
+
+    float Ball::GetMaxX() const
+    {
+        return m_aabb2.max.x;
+    }
+
+    float Ball::GetMaxY() const
+    {
+        return m_aabb2.max.y;
+    }
+
+    math::Vector2 Ball::GetCenter() const
+    {
+        return m_aabb2.GetCenter();
+    }
 }

@@ -2,6 +2,7 @@
 #define AABB2_H
 
 #include "Vector2.h"
+#include "MathUtilities.h"
 #include <limits>
 
 namespace math 

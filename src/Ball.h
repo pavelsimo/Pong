@@ -20,10 +20,14 @@ namespace pong
             void Move(const math::Vector2& rhs);
             float GetWidth() const;
             float GetHeight() const;
-
-            math::AABB2 m_aabb2;
+            float GetMinX() const;
+            float GetMinY() const;
+            float GetMaxX() const;
+            float GetMaxY() const;
+            math::Vector2 GetCenter() const;
 
             private:
+                math::AABB2 m_aabb2;
                 float m_width;
                 float m_height;
     };

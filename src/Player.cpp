@@ -18,14 +18,10 @@ namespace pong
 
     }
 
-    void Player::MoveUp(const float dy)
+    void Player::MoveVertical(const float dy, 
+        const float minY, const float maxY)
     {
-        m_paddle.MoveUp(dy);
-    }
-
-    void Player::MoveDown(const float dy)
-    {
-        m_paddle.MoveDown(dy);
+        m_paddle.MoveVertical(dy, minY, maxY);
     }
 
     void Player::UpdateScore(const int score)

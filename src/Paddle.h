@@ -16,15 +16,18 @@ namespace pong
             ~Paddle();
             
             // functions
-            void MoveUp(const float dy);
-            void MoveDown(const float dy);
+            void MoveVertical(const float dy, 
+                const float minY, const float maxY);
+
             float GetWidth() const;
             float GetHeight() const;
+            float GetMinX() const;
+            float GetMinY() const;
+            float GetMaxX() const;
+            float GetMaxY() const;
+            math::Vector2 GetCenter() const;
             math::AABB2 GetAABB2() const;
-            
         private:
-            void MoveVertical(const float dy);
-            
             math::AABB2 m_aabb2;
             float m_width;
             float m_height;

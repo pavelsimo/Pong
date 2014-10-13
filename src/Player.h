@@ -12,8 +12,9 @@ namespace pong
             Player(float x, float y, float paddleWidth, float paddleHeight);
             ~Player();
             
-            void MoveUp(const float dy);
-            void MoveDown(const float dy);
+            // functions
+            void MoveVertical(const float dy, 
+                const float minY, const float maxY);
             void UpdateScore(const int score);
             int GetScore() const;
             Paddle& GetPaddle();

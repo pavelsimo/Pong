@@ -25,14 +25,19 @@ namespace pong
 
     }
 
-    void Paddle::MoveUp(const float dy)
+    void Paddle::MoveVertical(const float dy,
+        const float minY, const float maxY)
     {
-        MoveVertical(-dy);
-    }
+        m_aabb2.Move(math::Vector2(0, dy));
 
-    void Paddle::MoveDown(const float dy)
-    {
-        MoveVertical(dy);
+        if(m_aabb2.min.y < minY)
+        {
+            m_aabb2.Move(math::Vector2(0, minY - m_aabb2.min.y));
+        } 
+        else if(m_aabb2.max.y > maxY)
+        {
+            m_aabb2.Move(math::Vector2(0, maxY - m_aabb2.max.y));
+        }
     }
 
     float Paddle::GetWidth() const
@@ -45,13 +50,33 @@ namespace pong
         return m_height;
     }
 
+    float Paddle::GetMinX() const
+    {
+        return m_aabb2.min.x;
+    }
+
+    float Paddle::GetMinY() const
+    {
+        return  m_aabb2.min.y;
+    }
+    
+    float Paddle::GetMaxX() const
+    {
+        return m_aabb2.max.x;
+    }
+
+    float Paddle::GetMaxY() const
+    {
+        return m_aabb2.max.y;
+    }
+
+    math::Vector2 Paddle::GetCenter() const
+    {
+        return m_aabb2.GetCenter();
+    }
+
     math::AABB2 Paddle::GetAABB2() const
     {
         return m_aabb2;
-    }
-
-    void Paddle::MoveVertical(const float dy)
-    {
-        m_aabb2.Move(math::Vector2(0, dy));
     }
 }
