@@ -34,7 +34,8 @@ namespace pong
         PADDLE_WIDTH, 
         PADDLE_HEIGHT
       ),
-      m_velBall(math::Vector2(BALL_SPEED, BALL_SPEED))
+      m_velBall(math::Vector2(BALL_SPEED, BALL_SPEED)),
+      m_state(PLAYING)
     {
 
     }
@@ -46,17 +47,33 @@ namespace pong
 
     void World::Draw()
     {
-        DrawPlayField();
-        DrawBall();
-        DrawPlayer1();
-        DrawPlayer2();
+        if(m_state == PLAYING)
+        {
+            DrawPlayField();
+            DrawBall();
+            DrawPlayer1();
+            DrawPlayer2();  
+        } 
+        else if(m_state == GAMEOVER) 
+        {
+            glClear(GL_COLOR_BUFFER_BIT);
+            DrawPlayField();
+        }
     }
 
     void World::Update()
     {
-        UpdateBall();
-        UpdatePlayer1();
-        UpdatePlayer2();
+        if(!IsBallInBounds())
+        {
+            ChangeState(GAMEOVER);
+        }
+
+        if(m_state == PLAYING)
+        {
+            UpdateBall();
+            UpdatePlayer1();
+            UpdatePlayer2(); 
+        }
     }
 
     void World::OnKeyDown(unsigned char key)
@@ -106,7 +123,7 @@ namespace pong
     }
 
     // ==================
-    // BALL
+    // Ball
     // ==================
 
     void World::UpdateBall() 
@@ -120,8 +137,7 @@ namespace pong
         math::AABB2 player2AABB2 = m_player2.GetPaddle().GetAABB2();
         math::AABB2 ballAABB2 = m_ball.GetAABB2();
 
-        if(ballAABB2.Intersects(player1AABB2) 
-            || ballAABB2.Intersects(player2AABB2))
+        if(ballAABB2.Intersects(player1AABB2) || ballAABB2.Intersects(player2AABB2))
         {
             m_velBall.x *= -1;
         }
@@ -153,7 +169,7 @@ namespace pong
     }
 
     // ==================
-    // Player 1
+    // Player 1 - AI
     // ==================
 
     void World::UpdatePlayer1()
@@ -170,18 +186,8 @@ namespace pong
         DrawPlayerPaddle(m_player1);
     }
 
-    bool World::HasP1CollideTop()
-    {
-        return m_player1.GetPaddle().GetMinY() < 0;
-    }
-
-    bool World::HasP1CollideBottom()
-    {
-        return m_player1.GetPaddle().GetMaxY() > m_height;
-    }
-
     // ==================
-    // Player 2
+    // Player 2 - You
     // ==================
 
     void World::UpdatePlayer2() 
@@ -196,7 +202,10 @@ namespace pong
         DrawPlayerPaddle(m_player2);
     }
 
-    // game ui
+    // ==================
+    // Game UI
+    // ==================
+
     void World::DrawPlayField()
     {
         draw::DrawLine(
@@ -207,8 +216,18 @@ namespace pong
         );
     }
 
+    void World::ChangeState(GameState state)
+    {
+        m_state = state;
+    }
+
+    void World::Restart() 
+    {
+        
+    }
+
     // ==================
-    // helpers
+    // Helpers
     // ==================
 
     void World::DrawPlayerPaddle(Player& player)

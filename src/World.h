@@ -46,8 +46,6 @@ namespace pong
             // player 1 (AI)
             void UpdatePlayer1();
             void DrawPlayer1();
-            bool HasP1CollideTop();
-            bool HasP1CollideBottom();
 
             // player 2 (You)
             void UpdatePlayer2();
@@ -56,6 +54,7 @@ namespace pong
             // game ui
             void DrawPlayField();
             void ChangeState(GameState state);
+            void Restart();
 
             // helpers
             void DrawPlayerPaddle(Player& player);

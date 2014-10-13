@@ -7,8 +7,6 @@ namespace draw
         LINE_TYPE type, float width )
     {
         glPushMatrix();
-
-        // LINES
         glLineWidth( width );
 
         if( type != SOLID )
@@ -16,9 +14,15 @@ namespace draw
             glEnable ( GL_LINE_STIPPLE );
 
             if( type == DASHED )
-                glLineStipple (1, 0x00FF);   /*  dashed   */
+            {
+                // dashed
+                glLineStipple (1, 0x00FF);
+            }
             else
-                glLineStipple (1, 0x0101); /* dotted */
+            {
+                // dotted
+                glLineStipple (1, 0x0101);
+            }
         }
 
         glBegin( GL_LINES );
