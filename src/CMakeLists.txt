@@ -23,7 +23,7 @@ ENDIF(NOT OPENGL_FOUND)
 # Setting DevIL
 FIND_PACKAGE(DevIL REQUIRED)
 IF(NOT IL_FOUND)
-	MESSAGE(ERROR " DevIL not found!")
+    MESSAGE(ERROR " DevIL not found!")
 ENDIF(NOT IL_FOUND)
 
 # Setting C++11
@@ -31,31 +31,31 @@ INCLUDE(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
 CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
 if(COMPILER_SUPPORTS_CXX11)
-	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 elseif(COMPILER_SUPPORTS_CXX0X)
-	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 else()
         MESSAGE(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
 ADD_EXECUTABLE(
-	Pong 
-	main.cpp
-	Player.cpp 
-	Ball.cpp
-	World.cpp
-	Paddle.cpp
-	Vector2.cpp
-	AABB2.cpp
-	Drawing.cpp
-	MathUtilities.cpp
+    Pong 
+    main.cpp
+    Player.cpp 
+    Ball.cpp
+    World.cpp
+    Paddle.cpp
+    Vector2.cpp
+    AABB2.cpp
+    Drawing.cpp
+    MathUtilities.cpp
 )
 
 TARGET_LINK_LIBRARIES(
-	Pong 
-	${OPENGL_LIBRARIES} 
-	${GLUT_LIBRARY}
-	${IL_LIBRARIES}
-	${ILU_LIBRARIES}
-	${ILUT_LIBRARIES}
+    Pong 
+    ${OPENGL_LIBRARIES} 
+    ${GLUT_LIBRARY}
+    ${IL_LIBRARIES}
+    ${ILU_LIBRARIES}
+    ${ILUT_LIBRARIES}
 )
