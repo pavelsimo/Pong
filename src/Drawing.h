@@ -8,8 +8,17 @@ namespace draw
 {
     enum LINE_TYPE { DOTTED, DASHED, SOLID };
 
-    void DrawLine( const math::Vector2 origin, const math::Vector2 end, 
-        LINE_TYPE type, float width );
+    void DrawLine( 
+        const math::Vector2 origin, 
+        const math::Vector2 end, 
+        LINE_TYPE type, 
+        float width 
+    );
+
+    void DrawQuad(
+        float minX, float minY, 
+        float maxX, float maxY
+    );
 }
 
 #endif

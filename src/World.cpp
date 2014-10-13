@@ -1,4 +1,5 @@
 #include "World.h"
+#include <iostream>
 
 namespace pong
 {
@@ -119,7 +120,8 @@ namespace pong
         math::AABB2 player2AABB2 = m_player2.GetPaddle().GetAABB2();
         math::AABB2 ballAABB2 = m_ball.GetAABB2();
 
-        if(ballAABB2.Intersects(player1AABB2) || ballAABB2.Intersects(player2AABB2))
+        if(ballAABB2.Intersects(player1AABB2) 
+            || ballAABB2.Intersects(player2AABB2))
         {
             m_velBall.x *= -1;
         }
@@ -129,7 +131,7 @@ namespace pong
 
     void World::DrawBall() 
     {
-        DrawQuad(
+        draw::DrawQuad(
             m_ball.GetMinX(), m_ball.GetMinY(),
             m_ball.GetMaxX(), m_ball.GetMaxY()
         );
@@ -143,6 +145,11 @@ namespace pong
     bool World::HasBallCollideBottom() const
     {
         return m_ball.GetMaxY() > m_height;
+    }
+
+    bool World::IsBallInBounds() const 
+    {
+        return !(m_ball.GetMinX() < 0 || m_ball.GetMaxX() > m_width);
     }
 
     // ==================
@@ -204,22 +211,9 @@ namespace pong
     // helpers
     // ==================
 
-    void World::DrawQuad(float minX, float minY, float maxX, float maxY)
-    {
-        glPushMatrix();
-        glBegin( GL_QUADS );
-            glColor3f(1.f, 1.f, 1.f); 
-            glVertex2f(minX, minY);
-            glVertex2f(maxX, minY);
-            glVertex2f(maxX, maxY);
-            glVertex2f(minX, maxY);
-        glEnd();
-        glPopMatrix();
-    }
-
     void World::DrawPlayerPaddle(Player& player)
     {
-        DrawQuad(
+        draw::DrawQuad(
             player.GetPaddle().GetMinX(), player.GetPaddle().GetMinY(),
             player.GetPaddle().GetMaxX(), player.GetPaddle().GetMaxY()
         );

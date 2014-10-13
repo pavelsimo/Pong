@@ -33,5 +33,18 @@ namespace draw
 
         glPopMatrix();  
     }
+
+    void DrawQuad(float minX, float minY, float maxX, float maxY)
+    {
+        glPushMatrix();
+        glBegin( GL_QUADS );
+            glColor3f(1.f, 1.f, 1.f); 
+            glVertex2f(minX, minY);
+            glVertex2f(maxX, minY);
+            glVertex2f(maxX, maxY);
+            glVertex2f(minX, maxY);
+        glEnd();
+        glPopMatrix();
+    }
 }
 

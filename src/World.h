@@ -10,6 +10,13 @@
 
 namespace pong
 {
+    enum GameState 
+    {
+        IDLE,
+        PLAYING,
+        GAMEOVER
+    };
+
     class World 
     {
         public:
@@ -34,6 +41,7 @@ namespace pong
             void DrawBall();
             bool HasBallCollideTop() const;
             bool HasBallCollideBottom() const;
+            bool IsBallInBounds() const;
 
             // player 1 (AI)
             void UpdatePlayer1();
@@ -47,11 +55,12 @@ namespace pong
 
             // game ui
             void DrawPlayField();
+            void ChangeState(GameState state);
 
             // helpers
             void DrawPlayerPaddle(Player& player);
-            void DrawQuad(float minX, float minY, float maxX, float maxY);
 
+            GameState m_state;
             float m_width;
             float m_height;
             Ball m_ball;
