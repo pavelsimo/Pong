@@ -3,7 +3,7 @@
 
 namespace pong
 {
-    const float BALL_SPEED = 4;
+    const float BALL_SPEED = -4;
     const float BALL_WIDTH = 20;
     const float BALL_HEIGHT = 20;
     const float BALL_VEL_MULT = 1;
@@ -37,9 +37,9 @@ namespace pong
         PADDLE_HEIGHT
       ),
       m_velBall(math::Vector2(BALL_SPEED, BALL_SPEED)),
-      m_state(PLAYING)
+      m_state(IDLE)
     {
-
+        
     }
 
     World::~World()
@@ -49,7 +49,25 @@ namespace pong
 
     void World::Draw()
     {
-        if(m_state == PLAYING)
+        if(m_state == IDLE)
+        {
+            if(m_texBanner.GetTexId() == 0)
+            {
+                //m_texBanner.LoadFromFile("pong_banner.png");
+            }
+            
+            draw::DrawTexture(
+                m_width * 0.5f, 
+                m_height * 0.5f, 
+                m_texBanner.GetTexId(),
+                m_texBanner.GetImgWidth(), 
+                m_texBanner.GetImgHeight(), 
+                m_texBanner.GetTexWidth(), 
+                m_texBanner.GetTexHeight()
+            );
+            
+        }
+        else if(m_state == PLAYING)
         {
             DrawPlayField();
             DrawBall();
@@ -65,16 +83,22 @@ namespace pong
 
     void World::Update()
     {
-        if(!IsBallInBounds())
+        if(m_state == IDLE)
         {
-            ChangeState(GAMEOVER);
+            // Do Nothing
         }
-
-        if(m_state == PLAYING)
+        else if(m_state == PLAYING)
         {
-            UpdateBall();
-            UpdatePlayer1();
-            UpdatePlayer2(); 
+            if(!IsBallInBounds())
+            {
+                ChangeState(GAMEOVER);
+            }
+            else
+            {
+                UpdateBall();
+                UpdatePlayer1();
+                UpdatePlayer2(); 
+            }
         }
         else if(m_state == GAMEOVER)
         {
@@ -232,28 +256,12 @@ namespace pong
     void World::Restart() 
     {
         ChangeState(PLAYING);
-        
         m_ball = Ball(
             m_width * 0.5f, 
             m_height * 0.5f, 
             BALL_WIDTH, 
             BALL_HEIGHT
         );
-
-        m_player1 = Player(
-            0, 
-            (m_height - PADDLE_HEIGHT) * 0.5f, 
-            PADDLE_WIDTH, 
-            PADDLE_HEIGHT
-        );
-
-        m_player2 = Player(
-            m_width - PADDLE_WIDTH, 
-            (m_height - PADDLE_HEIGHT) * 0.5f, 
-            PADDLE_WIDTH, 
-            PADDLE_HEIGHT
-        );
-
         m_velBall = math::Vector2(BALL_SPEED, BALL_SPEED);
     }
 

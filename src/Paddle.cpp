@@ -29,7 +29,7 @@ namespace pong
         const float minY, const float maxY)
     {
         m_aabb2.Move(math::Vector2(0, dy));
-
+        
         if(m_aabb2.min.y < minY)
         {
             m_aabb2.Move(math::Vector2(0, minY - m_aabb2.min.y));

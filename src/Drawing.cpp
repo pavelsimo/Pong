@@ -1,5 +1,6 @@
 
 #include "Drawing.h"
+#include <iostream>
 
 namespace draw
 {
@@ -50,5 +51,59 @@ namespace draw
         glEnd();
         glPopMatrix();
     }
+
+    void DrawTexture(
+        GLfloat x, GLfloat y, 
+        GLuint texId,
+        GLuint imgWidth, GLuint imgHeight, 
+        GLuint texWidth, GLuint texHeight,
+        Rect* clip
+    ) 
+    {
+        std::cout << texId << std::endl;
+
+        if(texId != 0)
+        {
+            glPushMatrix();
+            glLoadIdentity();
+
+            GLfloat texTop = 0.f;
+            GLfloat texBottom = (GLfloat)imgHeight / (GLfloat)texHeight;
+            GLfloat texLeft = 0.f;
+            GLfloat texRight = (GLfloat)imgWidth / (GLfloat)texWidth;
+
+            GLfloat quadWidth = imgWidth;
+            GLfloat quadHeight = imgHeight;
+
+            if(clip != NULL) 
+            {
+                texLeft = clip->x / texWidth;
+                texRight = (clip->x + clip->w) / texWidth;
+                texTop = clip->y / texHeight;
+                texBottom = (clip->y + clip->h) / texHeight;
+                
+                // vertex coordinates
+                quadWidth = clip->w;
+                quadHeight = clip->h;
+            }
+
+            // move to rendering point
+            glTranslatef(x, y, 0.f);
+
+            // set texture id
+            glBindTexture(GL_TEXTURE_2D, texId);
+
+            // render texture quad
+            glBegin(GL_QUADS);
+                glTexCoord2f(texLeft,  texTop);    glVertex2f(0.f,       0.f);
+                glTexCoord2f(texRight, texTop);    glVertex2f(quadWidth, 0.f);
+                glTexCoord2f(texRight, texBottom); glVertex2f(quadWidth, quadHeight);
+                glTexCoord2f(texLeft,  texBottom); glVertex2f(0.f,       quadHeight);
+            glEnd();
+
+            glPopMatrix();
+        }
+    }
+
 }
 

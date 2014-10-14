@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "MathUtilities.h"
 #include "Drawing.h"
+#include "Texture.h"
 
 namespace pong
 {
@@ -67,6 +68,7 @@ namespace pong
             Player m_player2;
             math::Vector2 m_velBall;
             math::Vector2 m_mousePos;
+            Texture m_texBanner;
     };
 }
 
