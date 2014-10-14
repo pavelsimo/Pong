@@ -38,17 +38,19 @@ else()
         MESSAGE(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
+MESSAGE( STATUS "PROJECT_SOURCE_DIR: " ${PROJECT_SOURCE_DIR} )
+
 ADD_EXECUTABLE(
     Pong 
-    main.cpp
-    Player.cpp 
-    Ball.cpp
-    World.cpp
-    Paddle.cpp
-    Vector2.cpp
-    AABB2.cpp
-    Drawing.cpp
-    MathUtilities.cpp
+    src/main.cpp
+    src/Player.cpp 
+    src/Ball.cpp
+    src/World.cpp
+    src/Paddle.cpp
+    src/Vector2.cpp
+    src/AABB2.cpp
+    src/Drawing.cpp
+    src/MathUtilities.cpp
 )
 
 TARGET_LINK_LIBRARIES(
@@ -59,3 +61,5 @@ TARGET_LINK_LIBRARIES(
     ${ILU_LIBRARIES}
     ${ILUT_LIBRARIES}
 )
+
+INSTALL(TARGETS Pong DESTINATION bin)
