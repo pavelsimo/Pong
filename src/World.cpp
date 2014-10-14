@@ -6,11 +6,12 @@ namespace pong
     const float BALL_SPEED = 4;
     const float BALL_WIDTH = 20;
     const float BALL_HEIGHT = 20;
+    const float BALL_VEL_MULT = 1;
     const float PADDLE_WIDTH = 20;
     const float PADDLE_HEIGHT = 80;
-
     const float DRAG = 0.5;
     const float LINE_WIDTH = 4;
+
 
     World::World()
     : m_width(640),
@@ -59,7 +60,6 @@ namespace pong
         {
             glClear(GL_COLOR_BUFFER_BIT);
             DrawPlayField();
-            Restart();
         }
     }
 
@@ -75,6 +75,10 @@ namespace pong
             UpdateBall();
             UpdatePlayer1();
             UpdatePlayer2(); 
+        }
+        else if(m_state == GAMEOVER)
+        {
+            Restart();
         }
     }
 
@@ -133,6 +137,7 @@ namespace pong
         if(HasBallCollideBottom() || HasBallCollideTop()) 
         {
             m_velBall.y *= -1;
+
         }
         
         math::AABB2 player1AABB2 = m_player1.GetPaddle().GetAABB2();
@@ -142,6 +147,7 @@ namespace pong
         if(ballAABB2.Intersects(player1AABB2) || ballAABB2.Intersects(player2AABB2))
         {
             m_velBall.x *= -1;
+            m_velBall *= BALL_VEL_MULT;
         }
 
         m_ball.Move(m_velBall);
@@ -247,6 +253,8 @@ namespace pong
             PADDLE_WIDTH, 
             PADDLE_HEIGHT
         );
+
+        m_velBall = math::Vector2(BALL_SPEED, BALL_SPEED);
     }
 
     // ==================
