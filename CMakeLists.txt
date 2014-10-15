@@ -51,6 +51,8 @@ ADD_EXECUTABLE(
     src/AABB2.cpp
     src/Drawing.cpp
     src/MathUtilities.cpp
+    src/Texture.cpp
+    src/ScoreBar.cpp
 )
 
 TARGET_LINK_LIBRARIES(

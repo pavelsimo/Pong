@@ -60,12 +60,10 @@ namespace draw
         Rect* clip
     ) 
     {
-        std::cout << texId << std::endl;
-
         if(texId != 0)
         {
             glPushMatrix();
-            glLoadIdentity();
+
 
             GLfloat texTop = 0.f;
             GLfloat texBottom = (GLfloat)imgHeight / (GLfloat)texHeight;
@@ -100,6 +98,8 @@ namespace draw
                 glTexCoord2f(texRight, texBottom); glVertex2f(quadWidth, quadHeight);
                 glTexCoord2f(texLeft,  texBottom); glVertex2f(0.f,       quadHeight);
             glEnd();
+
+            glBindTexture(GL_TEXTURE_2D, NULL);
 
             glPopMatrix();
         }

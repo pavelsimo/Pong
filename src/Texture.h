@@ -13,7 +13,7 @@ class Texture
         Texture();
         ~Texture();
 
-        bool LoadFromFile(std::string path);
+        bool LoadFromFile(const std::string& path);
         bool LoadFromPixels32(GLuint *pixels, 
             GLuint imgWidth, GLuint imgHeight, 
             GLuint texWidth, GLuint texHeight);

@@ -13,6 +13,7 @@ void Render();
 void Update();
 void OnKeyboardEvent(unsigned char key, int x, int y);
 void OnKeyboardUpEvent(unsigned char key, int x, int y);
+void OnMouseClick(int button, int state, int x, int y);
 void GameLoop(int value);
 
 pong::World* g_world = nullptr;
@@ -25,11 +26,29 @@ bool InitializeGL()
     glOrtho(g_world->GetLeft(), g_world->GetRight(), 
         g_world->GetBottom(), g_world->GetTop(), 1.0, -1.0);
     glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glPushMatrix();
+
+    glClearColor(0.f, 0.f, 0.f, 1.f);
+    glEnable(GL_TEXTURE_2D);
 
     GLenum error = glGetError();
     if (error !=  GL_NO_ERROR ) 
     {
         std::cout << "Error initializing OpenGL! " << gluErrorString(error) << std::endl;
+        return false;
+    }
+
+    // initialize DevIL and DevILU
+    ilInit();
+    iluInit();
+    ilClearColour(0, 0, 0, 0);
+
+    // check for errors
+    ILenum ilError = ilGetError();
+    if(ilError != IL_NO_ERROR)
+    {
+        printf( "Error initializing DevIL! %s\n", iluErrorString( ilError ) );
         return false;
     }
 
@@ -63,6 +82,11 @@ void OnMouseMoveEvent(int x, int y)
     g_world->OnMouseMove(x, y);
 }
 
+void OnMouseClick(int button, int state, int x, int y)
+{
+    g_world->OnMouseClick(button, state, x, y);
+}
+
 void GameLoop(int value)
 {
     Update();
@@ -93,6 +117,7 @@ int main(int argc, char** argv)
     glutDisplayFunc(Render);
     glutKeyboardFunc(OnKeyboardEvent);
     glutPassiveMotionFunc(OnMouseMoveEvent);
+    glutMouseFunc( OnMouseClick );
     glutTimerFunc(1000 / SCREEN_FPS, GameLoop, 0);
     glutMainLoop();
 

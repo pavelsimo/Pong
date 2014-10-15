@@ -1,5 +1,6 @@
 #include "Texture.h"
-
+#include <IL/il.h>
+#include <IL/ilu.h>
 
 Texture::Texture()
 : m_texId(0),
@@ -17,7 +18,7 @@ Texture::~Texture()
     Clean();
 }
 
-bool Texture::LoadFromFile(std::string path)
+bool Texture::LoadFromFile(const std::string& path)
 {
     bool isTextureLoaded = false;
     ILuint imgID = 0;

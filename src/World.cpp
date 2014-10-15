@@ -6,12 +6,11 @@ namespace pong
     const float BALL_SPEED = -4;
     const float BALL_WIDTH = 20;
     const float BALL_HEIGHT = 20;
-    const float BALL_VEL_MULT = 1;
+    const float BALL_VEL_MULT = 1.1;
     const float PADDLE_WIDTH = 20;
     const float PADDLE_HEIGHT = 80;
-    const float DRAG = 0.5;
+    const float DRAG = 0.2;
     const float LINE_WIDTH = 4;
-
 
     World::World()
     : m_width(640),
@@ -37,42 +36,62 @@ namespace pong
         PADDLE_HEIGHT
       ),
       m_velBall(math::Vector2(BALL_SPEED, BALL_SPEED)),
-      m_state(IDLE)
+      m_state(IDLE),
+      m_texBanner(nullptr),
+      m_texFonts(nullptr),
+      m_scorePlayer1(nullptr),
+      m_scorePlayer2(nullptr)
     {
-        
+
     }
 
     World::~World()
     {
+        // clean m_texBanner
+        if(m_texBanner != nullptr)
+        {
+            delete m_texBanner;
+            m_texBanner = nullptr;
+        }
 
+        // clean m_texFonts
+        if(m_texFonts != nullptr)
+        {
+            delete m_texFonts;
+            m_texFonts = nullptr;
+        }
+
+        // clean m_scorePlayer1
+        if(m_scorePlayer1 != nullptr)
+        {
+            delete m_scorePlayer1;
+            m_scorePlayer1 = nullptr;
+        }
+
+        // clean m_scorePlayer2
+        if(m_scorePlayer2 != nullptr)
+        {
+            delete m_scorePlayer2;
+            m_scorePlayer2 = nullptr;
+        }
     }
 
     void World::Draw()
     {
         if(m_state == IDLE)
         {
-            if(m_texBanner.GetTexId() == 0)
+            if(m_texBanner != nullptr && m_texBanner->GetTexId() != 0)
             {
-                //m_texBanner.LoadFromFile("pong_banner.png");
+                DrawBanner();
             }
-            
-            draw::DrawTexture(
-                m_width * 0.5f, 
-                m_height * 0.5f, 
-                m_texBanner.GetTexId(),
-                m_texBanner.GetImgWidth(), 
-                m_texBanner.GetImgHeight(), 
-                m_texBanner.GetTexWidth(), 
-                m_texBanner.GetTexHeight()
-            );
-            
         }
         else if(m_state == PLAYING)
         {
             DrawPlayField();
+            DrawScore();
             DrawBall();
             DrawPlayer1();
-            DrawPlayer2();  
+            DrawPlayer2();
         } 
         else if(m_state == GAMEOVER) 
         {
@@ -85,7 +104,19 @@ namespace pong
     {
         if(m_state == IDLE)
         {
-            // Do Nothing
+            // TODO: (Pavel) move this to a new Initialize() method
+            if(m_texBanner == nullptr)
+            {
+                // TODO: (Pavel) change to relative paths
+                LoadBannerTexture("/home/pavelsimo/workspace/Games_Cpp/Pong/images/pong_banner.png");
+            }
+            if(m_texFonts == nullptr)
+            {
+                // TODO: (Pavel) change to relative paths
+                LoadFontTexture("/home/pavelsimo/workspace/Games_Cpp/Pong/fonts/MainFont_EN_00.png");
+                m_scorePlayer1 = new ScoreBar(0, m_texFonts);
+                m_scorePlayer2 = new ScoreBar(0, m_texFonts);
+            }
         }
         else if(m_state == PLAYING)
         {
@@ -102,6 +133,16 @@ namespace pong
         }
         else if(m_state == GAMEOVER)
         {
+            if(HasBallCollideLeft())
+            {
+                m_player2.UpdateScore(1);
+                m_scorePlayer2->SetScore(m_player2.GetScore());
+            }
+            else if(HasBallCollideRight())
+            {
+                m_player1.UpdateScore(1);
+                m_scorePlayer1->SetScore(m_player1.GetScore());
+            }
             Restart();
         }
     }
@@ -120,6 +161,14 @@ namespace pong
     {
         m_mousePos.x = x;
         m_mousePos.y = y;
+    }
+
+    void World::OnMouseClick(int button, int state, int x, int y)
+    {
+        if(m_state == IDLE)
+        {
+            ChangeState(PLAYING);
+        }
     }
 
     float World::GetWidth() const
@@ -161,9 +210,8 @@ namespace pong
         if(HasBallCollideBottom() || HasBallCollideTop()) 
         {
             m_velBall.y *= -1;
-
         }
-        
+
         math::AABB2 player1AABB2 = m_player1.GetPaddle().GetAABB2();
         math::AABB2 player2AABB2 = m_player2.GetPaddle().GetAABB2();
         math::AABB2 ballAABB2 = m_ball.GetAABB2();
@@ -195,9 +243,19 @@ namespace pong
         return m_ball.GetMaxY() > m_height;
     }
 
+    bool World::HasBallCollideLeft() const
+    {
+        return m_ball.GetMinX() < 0;
+    }
+
+    bool World::HasBallCollideRight() const
+    {
+        return m_ball.GetMaxX() > m_width;
+    }
+
     bool World::IsBallInBounds() const 
     {
-        return !(m_ball.GetMinX() < 0 || m_ball.GetMaxX() > m_width);
+        return !(HasBallCollideLeft() || HasBallCollideRight());
     }
 
     // ==================
@@ -248,6 +306,26 @@ namespace pong
         );
     }
 
+    void World::DrawScore()
+    {
+        m_scorePlayer1->Render(m_width / 2 - 200, 50);
+        m_scorePlayer2->Render(m_width / 2 + 200 - 30, 50);
+    }
+
+    void World::DrawBanner()
+    {
+        // TODO: (Pavel) add method DrawBanner()
+        draw::DrawTexture(
+                m_width * 0.5f - m_texBanner->GetTexWidth() * 0.5f,
+                m_height * 0.5f - m_texBanner->GetTexHeight() * 0.5f,
+                m_texBanner->GetTexId(),
+                m_texBanner->GetImgWidth(),
+                m_texBanner->GetImgHeight(),
+                m_texBanner->GetTexWidth(),
+                m_texBanner->GetTexHeight()
+        );
+    }
+
     void World::ChangeState(GameState state)
     {
         m_state = state;
@@ -264,6 +342,31 @@ namespace pong
         );
         m_velBall = math::Vector2(BALL_SPEED, BALL_SPEED);
     }
+
+    bool World::LoadBannerTexture(const std::string& path)
+    {
+        if(m_texBanner == nullptr)
+        {
+            m_texBanner = new Texture();
+            if(!m_texBanner->LoadFromFile(path))
+            {
+                std::cout << "Unable to load the texture" << '\n';
+            }
+        }
+    }
+
+    bool World::LoadFontTexture(const std::string& path)
+    {
+        if(m_texFonts == nullptr)
+        {
+            m_texFonts = new Texture();
+            if(!m_texFonts->LoadFromFile(path))
+            {
+                std::cout << "Unable to load the texture" << '\n';
+            }
+        }
+    }
+
 
     // ==================
     // Helpers

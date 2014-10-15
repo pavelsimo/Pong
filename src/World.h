@@ -8,6 +8,7 @@
 #include "MathUtilities.h"
 #include "Drawing.h"
 #include "Texture.h"
+#include "ScoreBar.h"
 
 namespace pong
 {
@@ -30,6 +31,7 @@ namespace pong
             void OnKeyDown(unsigned char key);
             void OnKeyUp(unsigned char key);
             void OnMouseMove(int x, int y);
+            void OnMouseClick(int button, int state, int x, int y);
             float GetWidth() const;
             float GetHeight() const;
             float GetLeft() const;
@@ -42,20 +44,28 @@ namespace pong
             void DrawBall();
             bool HasBallCollideTop() const;
             bool HasBallCollideBottom() const;
+            bool HasBallCollideLeft() const;
+            bool HasBallCollideRight() const;
             bool IsBallInBounds() const;
 
             // player 1 (AI)
             void UpdatePlayer1();
             void DrawPlayer1();
+            bool HasPlayer1Score();
 
             // player 2 (You)
             void UpdatePlayer2();
             void DrawPlayer2();
+            bool HasPlayer2Score();
 
             // game ui
             void DrawPlayField();
+            void DrawScore();
+            void DrawBanner();
             void ChangeState(GameState state);
             void Restart();
+            bool LoadBannerTexture(const std::string& path);
+            bool LoadFontTexture(const std::string& path);
 
             // helpers
             void DrawPlayerPaddle(Player& player);
@@ -66,9 +76,13 @@ namespace pong
             Ball m_ball;
             Player m_player1;
             Player m_player2;
+            ScoreBar* m_scorePlayer1;
+            ScoreBar* m_scorePlayer2;
+
             math::Vector2 m_velBall;
             math::Vector2 m_mousePos;
-            Texture m_texBanner;
+            Texture* m_texBanner;
+            Texture* m_texFonts;
     };
 }
 

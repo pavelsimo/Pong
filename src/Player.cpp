@@ -3,12 +3,14 @@
 namespace pong
 {
     Player::Player()
+    : m_score(0)
     {
         
     }
 
     Player::Player(float x, float y, float paddleWidth, float paddleHeight)
-    : m_paddle(math::Vector2(x, y), paddleWidth, paddleHeight)
+    : m_paddle(math::Vector2(x, y), paddleWidth, paddleHeight),
+      m_score(0)
     {
 
     }
