@@ -55,7 +55,7 @@ bool Texture::LoadFromFile(const std::string& path)
             iluEnlargeCanvas((int)texWidth, (int)texHeight, 1);
         }
 
-        // load the texture in m_pixels
+        // load the texture in m_pixelsgi
         isTextureLoaded = LoadFromPixels32(
             (GLuint *) ilGetData(), // pixels array
             imgWidth,
@@ -112,7 +112,7 @@ bool Texture::LoadFromPixels32(GLuint *pixels,
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
     // ubind the texture
-    glBindTexture(GL_TEXTURE_2D, NULL);
+    glBindTexture(GL_TEXTURE_2D, 0);
 
     GLenum error = glGetError();
     if(error != GL_NO_ERROR)
@@ -184,11 +184,11 @@ GLuint Texture::NearestPower2(GLuint n)
     if( n != 0 ) 
     { 
         n--; 
-        n |= (n >> 1); //Or first 2 bits 
-        n |= (n >> 2); //Or next 2 bits 
-        n |= (n >> 4); //Or next 4 bits 
-        n |= (n >> 8); //Or next 8 bits 
-        n |= (n >> 16); //Or next 16 bits 
+        n |= (n >> 1);
+        n |= (n >> 2);
+        n |= (n >> 4);
+        n |= (n >> 8);
+        n |= (n >> 16);
         n++; 
     } 
     return n; 

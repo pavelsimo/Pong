@@ -6,7 +6,7 @@ namespace pong
     const float BALL_SPEED = -4;
     const float BALL_WIDTH = 20;
     const float BALL_HEIGHT = 20;
-    const float BALL_VEL_MULT = 1.1;
+    const float BALL_VEL_MULT = 1;
     const float PADDLE_WIDTH = 20;
     const float PADDLE_HEIGHT = 80;
     const float DRAG = 0.2;
@@ -97,6 +97,7 @@ namespace pong
         {
             glClear(GL_COLOR_BUFFER_BIT);
             DrawPlayField();
+            DrawScore();
         }
     }
 
