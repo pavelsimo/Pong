@@ -31,29 +31,29 @@ bool Sound::LoadFromFile(const char* filename)
 
     /*
 
-	// The version of ALUT that ships with OS X 10.4 
-	// and earlier is fairly old, and does not include the 
-	// alutCreateBufferHelloWorld or alutCreateBufferFromFile 
-	// functions; you'll need to use the older, deprecated API instead:
+    // The version of ALUT that ships with OS X 10.4 
+    // and earlier is fairly old, and does not include the 
+    // alutCreateBufferHelloWorld or alutCreateBufferFromFile 
+    // functions; you'll need to use the older, deprecated API instead:
 
     alutLoadWAVFile((ALbyte *)"/path/to/audio.wav",
         &format,&data,&size,&freq,&loop);
     alBufferData(buffer[0],format,data,size,freq);
     alutUnloadWAV(format,data,size,freq);
-	
-	*/
+    
+    */
 
     return true;
 }
 
 void Sound::Play()
 {
-	alSourcePlay(m_source);
+    alSourcePlay(m_source);
 }
 
 void Sound::Stop()
 {
-	alSourceStop(m_source);
+    alSourceStop(m_source);
 }
 
 void Sound::Pause()

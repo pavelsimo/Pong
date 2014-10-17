@@ -7,19 +7,19 @@
 
 class Sound 
 {
-	public:
-		// ctor & dtor
-		Sound();
-		~Sound();
+    public:
+        // ctor & dtor
+        Sound();
+        ~Sound();
 
-		// functions
-		bool LoadFromFile(const char* filename);
-		void Play();
-		void Stop();
-		void Pause();
-	private:
-		ALuint m_buffer;
-		ALuint m_source;
+        // functions
+        bool LoadFromFile(const char* filename);
+        void Play();
+        void Stop();
+        void Pause();
+    private:
+        ALuint m_buffer;
+        ALuint m_source;
 };
 
 #endif
