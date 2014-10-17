@@ -99,7 +99,8 @@ namespace draw
                 glTexCoord2f(texLeft,  texBottom); glVertex2f(0.f,       quadHeight);
             glEnd();
 
-            glBindTexture(GL_TEXTURE_2D, NULL);
+            // unbind the texture
+            glBindTexture(GL_TEXTURE_2D, 0);
 
             glPopMatrix();
         }

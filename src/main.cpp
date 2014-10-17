@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "LOpenGL.h"
+#include "LOpenAL.h"
 #include "World.h"
 
 const int SCREEN_WIDTH = 1136;
@@ -17,7 +18,7 @@ void OnMouseClick(int button, int state, int x, int y);
 void GameLoop(int value);
 
 pong::World* g_world = nullptr;
- 
+
 bool InitializeGL()
 {
     glViewport(0.f, 0.f, g_world->GetWidth(), g_world->GetHeight());
@@ -52,11 +53,6 @@ bool InitializeGL()
         return false;
     }
 
-    return true;
-}
-
-bool LoadingMedia()
-{
     return true;
 }
 
@@ -109,10 +105,8 @@ int main(int argc, char** argv)
         std::cout << "Unable to initalize OpenGL." << std::endl;
     }
 
-    if(!LoadingMedia())
-    {
-        std::cout << "Unable to load multimedia resources." << std::endl;
-    }
+    // initialize alut
+    alutInit (&argc, argv);
 
     glutDisplayFunc(Render);
     glutKeyboardFunc(OnKeyboardEvent);
@@ -120,6 +114,9 @@ int main(int argc, char** argv)
     glutMouseFunc( OnMouseClick );
     glutTimerFunc(1000 / SCREEN_FPS, GameLoop, 0);
     glutMainLoop();
+
+    // exit alut
+    alutExit();
 
     if(g_world != nullptr)
     {

@@ -40,7 +40,9 @@ namespace pong
       m_texBanner(nullptr),
       m_texFonts(nullptr),
       m_scorePlayer1(nullptr),
-      m_scorePlayer2(nullptr)
+      m_scorePlayer2(nullptr),
+      m_sndTheme(nullptr),
+      m_sndBallHitPaddle(nullptr)
     {
 
     }
@@ -73,6 +75,20 @@ namespace pong
         {
             delete m_scorePlayer2;
             m_scorePlayer2 = nullptr;
+        }
+
+        // clean sound theme
+        if(m_sndTheme != nullptr) 
+        {
+            delete m_sndTheme;
+            m_sndTheme = nullptr;
+        }
+
+        // clean m_sndBallHitPaddle
+        if(m_sndBallHitPaddle != nullptr) 
+        {
+            delete m_sndTheme;
+            m_sndTheme = nullptr;
         }
     }
 
@@ -117,6 +133,17 @@ namespace pong
                 LoadFontTexture("/home/pavelsimo/workspace/Games_Cpp/Pong/fonts/MainFont_EN_00.png");
                 m_scorePlayer1 = new ScoreBar(0, m_texFonts);
                 m_scorePlayer2 = new ScoreBar(0, m_texFonts);
+            }
+            if(m_sndTheme == nullptr)
+            {
+                m_sndTheme = new Sound();
+                m_sndTheme->LoadFromFile("/home/pavelsimo/workspace/Games_Cpp/Pong/sound/pong_OST.wav");
+                m_sndTheme->Play();
+            }
+            if(m_sndBallHitPaddle == nullptr)
+            {
+                m_sndBallHitPaddle = new Sound();
+                m_sndBallHitPaddle->LoadFromFile("/home/pavelsimo/workspace/Games_Cpp/Pong/sound/ball_bounce.wav");
             }
         }
         else if(m_state == PLAYING)
@@ -169,6 +196,10 @@ namespace pong
         if(m_state == IDLE)
         {
             ChangeState(PLAYING);
+            if(m_sndTheme != nullptr) 
+            {
+                m_sndTheme->Stop();
+            }
         }
     }
 
@@ -221,6 +252,7 @@ namespace pong
         {
             m_velBall.x *= -1;
             m_velBall *= BALL_VEL_MULT;
+            m_sndBallHitPaddle->Play();
         }
 
         m_ball.Move(m_velBall);

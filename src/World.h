@@ -8,6 +8,7 @@
 #include "MathUtilities.h"
 #include "Drawing.h"
 #include "Texture.h"
+#include "Sound.h"
 #include "ScoreBar.h"
 
 namespace pong
@@ -76,13 +77,14 @@ namespace pong
             Ball m_ball;
             Player m_player1;
             Player m_player2;
-            ScoreBar* m_scorePlayer1;
-            ScoreBar* m_scorePlayer2;
-
             math::Vector2 m_velBall;
             math::Vector2 m_mousePos;
+            ScoreBar* m_scorePlayer1;
+            ScoreBar* m_scorePlayer2;
             Texture* m_texBanner;
             Texture* m_texFonts;
+            Sound* m_sndTheme;
+            Sound* m_sndBallHitPaddle;
     };
 }
 

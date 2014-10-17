@@ -8,6 +8,8 @@
 #include <map>
 #include <string>
 
+const int NUM_RECTS = 10;
+
 class ScoreBar
 {
     public:
@@ -22,7 +24,7 @@ class ScoreBar
 
         int m_score;
         Texture* m_texture;
-        std::map<int, draw::Rect> m_intToRect;
+        draw::Rect m_clipRegion[NUM_RECTS];
 };
 
 #endif
