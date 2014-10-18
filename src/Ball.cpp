@@ -9,8 +9,8 @@ namespace pong
         
     }
 
-    Ball::Ball(const float x, const float y, 
-        const float width, const float height)
+    Ball::Ball(float x, float y, 
+        float width, float height)
     : m_aabb2(
         math::Vector2(x, y), 
         math::Vector2(x + width, y + height)
@@ -22,7 +22,7 @@ namespace pong
     }
 
     Ball::Ball(const math::Vector2 topleft, 
-        const float width, const float height)
+        float width, float height)
     : m_aabb2(
         topleft, 
         math::Vector2(topleft.x + width, topleft.y + height)

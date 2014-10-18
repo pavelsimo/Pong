@@ -11,12 +11,11 @@ namespace pong
         public:
             // ctor & dtor
             Ball();
-            Ball(const float x, const float y, 
-                const float width, const float height);
+            Ball(float x, float y, float width, float height);
             Ball(const math::Vector2 topleft, 
-                const float width, const float height);
+                float width, float height);
             ~Ball();
-
+            
             void Move(const math::Vector2& rhs);
             float GetWidth() const;
             float GetHeight() const;
