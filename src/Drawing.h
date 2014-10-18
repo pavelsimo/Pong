@@ -33,8 +33,8 @@ namespace draw
     };
 
     void DrawLine( 
-        const math::Vector2 origin, 
-        const math::Vector2 end, 
+        const math::Vector2& origin, 
+        const math::Vector2& end, 
         LineType type, 
         float width 
     );

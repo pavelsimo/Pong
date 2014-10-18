@@ -81,7 +81,10 @@ namespace pong
     {
         if(m_state == IDLE)
         {
-            LoadResources();
+            if(LoadResources())
+            {
+                // ...
+            }
         }
         else if(m_state == PLAYING)
         {
@@ -266,10 +269,11 @@ namespace pong
     // Game UI
     // ==================
 
-    void World::LoadResources()
+    bool World::LoadResources()
     {
         // TODO: (Pavel) fix the issue when users load the game from 
         // a different directory (e.g. ../bin/Pong)
+
         if(m_texBanner == nullptr)
         {
             LoadBannerTexture("images/pong_banner.png");
@@ -282,6 +286,11 @@ namespace pong
             m_scorePlayer2 = new ScoreBar(0, m_texFonts);
         }
 
+        // TODO: (Pavel) This sound class is horrible...
+        // There should be a SoundManager, that controls all the
+        // game sounds. There is a bug as well, which is 
+        // just playing the last sound...
+        
         if(m_sndTheme == nullptr)
         {
             m_sndTheme = new Sound();
@@ -294,6 +303,8 @@ namespace pong
             m_sndBallHitPaddle = new Sound();
             m_sndBallHitPaddle->LoadFromFile("sounds/ball_bounce.wav");
         }
+
+        return true;
     }
 
     void World::CleanResources()
@@ -411,7 +422,7 @@ namespace pong
             }
         }
     }
-    
+
     // ==================
     // Helpers
     // ==================

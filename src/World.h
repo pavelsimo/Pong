@@ -60,7 +60,7 @@ namespace pong
             bool HasPlayer2Score();
 
             // game ui
-            void LoadResources();
+            bool LoadResources();
             void CleanResources();
             void DrawPlayField();
             void DrawScore();

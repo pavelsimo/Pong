@@ -1,5 +1,7 @@
 #include "Sound.h"
 
+
+
 Sound::Sound()
 : m_buffer(0),
   m_source(0)
@@ -14,7 +16,10 @@ Sound::~Sound()
 
 bool Sound::LoadFromFile(const char* filename)
 {
+
     m_buffer = alutCreateBufferFromFile(filename);
+    std::cout << m_buffer << std::endl;
+
     if ( alutGetError() != ALUT_ERROR_NO_ERROR )
     {
        std::cout << "Unable to create the buffer." << std::endl;
@@ -27,6 +32,7 @@ bool Sound::LoadFromFile(const char* filename)
         std::cout << "Unable to generate the source." << std::endl;
         return false;
     }
+    std::cout << m_source << std::endl;
     alSourcei(m_source, AL_BUFFER, m_buffer);
 
     /*
