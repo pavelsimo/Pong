@@ -2,11 +2,12 @@
 #define MATH_UTILITIES_H
 
 #include <cmath>
+#include <cstdint>
 
 #define PI 3.14159
 
 typedef float real;
-typedef int int32;
+typedef int32_t int32;
 typedef bool boolean;
 
 namespace math 

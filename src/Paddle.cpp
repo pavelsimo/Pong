@@ -4,12 +4,14 @@ namespace pong
 {
 
     Paddle::Paddle()
+    : m_width(0),
+      m_height(0)
     {
         
     }
 
     Paddle::Paddle(const math::Vector2 topleft, 
-        const float width, const float height)
+        float width, float height)
     : m_aabb2(
         topleft, 
         math::Vector2(topleft.x + width, topleft.y + height)
@@ -25,8 +27,7 @@ namespace pong
 
     }
 
-    void Paddle::MoveVertical(const float dy,
-        const float minY, const float maxY)
+    void Paddle::MoveVertical(float dy, float minY, float maxY)
     {
         m_aabb2.Move(math::Vector2(0, dy));
         

@@ -16,7 +16,7 @@ namespace math
     }
   
     AABB2::AABB2(const Vector2& center, const real radius) :
-        min(Vector2(center.x - radius, center.y - radius)),
+        min(Vector2(center.x - fabs(radius), center.y - fabs(radius))),
         max(Vector2(center.x + radius, center.y + radius))
     {
         

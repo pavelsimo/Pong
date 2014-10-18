@@ -49,47 +49,7 @@ namespace pong
 
     World::~World()
     {
-        // clean m_texBanner
-        if(m_texBanner != nullptr)
-        {
-            delete m_texBanner;
-            m_texBanner = nullptr;
-        }
-
-        // clean m_texFonts
-        if(m_texFonts != nullptr)
-        {
-            delete m_texFonts;
-            m_texFonts = nullptr;
-        }
-
-        // clean m_scorePlayer1
-        if(m_scorePlayer1 != nullptr)
-        {
-            delete m_scorePlayer1;
-            m_scorePlayer1 = nullptr;
-        }
-
-        // clean m_scorePlayer2
-        if(m_scorePlayer2 != nullptr)
-        {
-            delete m_scorePlayer2;
-            m_scorePlayer2 = nullptr;
-        }
-
-        // clean sound theme
-        if(m_sndTheme != nullptr) 
-        {
-            delete m_sndTheme;
-            m_sndTheme = nullptr;
-        }
-
-        // clean m_sndBallHitPaddle
-        if(m_sndBallHitPaddle != nullptr) 
-        {
-            delete m_sndTheme;
-            m_sndTheme = nullptr;
-        }
+        CleanResources();
     }
 
     void World::Draw()
@@ -121,30 +81,7 @@ namespace pong
     {
         if(m_state == IDLE)
         {
-            // TODO: (Pavel) move this to a new Initialize() method
-            if(m_texBanner == nullptr)
-            {
-                // TODO: (Pavel) change to relative paths
-                LoadBannerTexture("/home/pavelsimo/workspace/Games_Cpp/Pong/images/pong_banner.png");
-            }
-            if(m_texFonts == nullptr)
-            {
-                // TODO: (Pavel) change to relative paths
-                LoadFontTexture("/home/pavelsimo/workspace/Games_Cpp/Pong/fonts/MainFont_EN_00.png");
-                m_scorePlayer1 = new ScoreBar(0, m_texFonts);
-                m_scorePlayer2 = new ScoreBar(0, m_texFonts);
-            }
-            if(m_sndTheme == nullptr)
-            {
-                m_sndTheme = new Sound();
-                m_sndTheme->LoadFromFile("/home/pavelsimo/workspace/Games_Cpp/Pong/sound/pong_OST.wav");
-                m_sndTheme->Play();
-            }
-            if(m_sndBallHitPaddle == nullptr)
-            {
-                m_sndBallHitPaddle = new Sound();
-                m_sndBallHitPaddle->LoadFromFile("/home/pavelsimo/workspace/Games_Cpp/Pong/sound/ball_bounce.wav");
-            }
+            LoadResources();
         }
         else if(m_state == PLAYING)
         {
@@ -328,6 +265,81 @@ namespace pong
     // ==================
     // Game UI
     // ==================
+
+    void World::LoadResources()
+    {
+        // TODO: (Pavel) fix the issue when users load the game from 
+        // a different directory (e.g. ../bin/Pong)
+        if(m_texBanner == nullptr)
+        {
+            LoadBannerTexture("images/pong_banner.png");
+        }
+
+        if(m_texFonts == nullptr)
+        {
+            LoadFontTexture("fonts/MainFont_EN_00.png");
+            m_scorePlayer1 = new ScoreBar(0, m_texFonts);
+            m_scorePlayer2 = new ScoreBar(0, m_texFonts);
+        }
+
+        if(m_sndTheme == nullptr)
+        {
+            m_sndTheme = new Sound();
+            m_sndTheme->LoadFromFile("sounds/pong_OST.wav");
+            m_sndTheme->Play();
+        }
+
+        if(m_sndBallHitPaddle == nullptr)
+        {
+            m_sndBallHitPaddle = new Sound();
+            m_sndBallHitPaddle->LoadFromFile("sounds/ball_bounce.wav");
+        }
+    }
+
+    void World::CleanResources()
+    {
+        // clean m_texBanner
+        if(m_texBanner != nullptr)
+        {
+            delete m_texBanner;
+            m_texBanner = nullptr;
+        }
+
+        // clean m_texFonts
+        if(m_texFonts != nullptr)
+        {
+            delete m_texFonts;
+            m_texFonts = nullptr;
+        }
+
+        // clean m_scorePlayer1
+        if(m_scorePlayer1 != nullptr)
+        {
+            delete m_scorePlayer1;
+            m_scorePlayer1 = nullptr;
+        }
+
+        // clean m_scorePlayer2
+        if(m_scorePlayer2 != nullptr)
+        {
+            delete m_scorePlayer2;
+            m_scorePlayer2 = nullptr;
+        }
+
+        // clean sound theme
+        if(m_sndTheme != nullptr) 
+        {
+            delete m_sndTheme;
+            m_sndTheme = nullptr;
+        }
+
+        // clean m_sndBallHitPaddle
+        if(m_sndBallHitPaddle != nullptr) 
+        {
+            delete m_sndTheme;
+            m_sndTheme = nullptr;
+        }
+    }
 
     void World::DrawPlayField()
     {

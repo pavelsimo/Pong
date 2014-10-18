@@ -6,7 +6,11 @@
 
 namespace draw
 {
-    enum LINE_TYPE { DOTTED, DASHED, SOLID };
+    enum LineType { 
+        SOLID, 
+        DOTTED = 0x0101, 
+        DASHED = 0x00FF 
+    };
 
     struct Rect 
     {
@@ -31,7 +35,7 @@ namespace draw
     void DrawLine( 
         const math::Vector2 origin, 
         const math::Vector2 end, 
-        LINE_TYPE type, 
+        LineType type, 
         float width 
     );
 

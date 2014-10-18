@@ -5,7 +5,7 @@
 namespace draw
 {
     void DrawLine( const math::Vector2 origin, const math::Vector2 end, 
-        LINE_TYPE type, float width )
+        LineType type, float width )
     {
         glPushMatrix();
         glLineWidth( width );
@@ -13,17 +13,7 @@ namespace draw
         if( type != SOLID )
         {
             glEnable ( GL_LINE_STIPPLE );
-
-            if( type == DASHED )
-            {
-                // dashed
-                glLineStipple (1, 0x00FF);
-            }
-            else
-            {
-                // dotted
-                glLineStipple (1, 0x0101);
-            }
+            glLineStipple (1, type);
         }
 
         glBegin( GL_LINES );
@@ -63,8 +53,7 @@ namespace draw
         if(texId != 0)
         {
             glPushMatrix();
-
-
+            
             GLfloat texTop = 0.f;
             GLfloat texBottom = (GLfloat)imgHeight / (GLfloat)texHeight;
             GLfloat texLeft = 0.f;

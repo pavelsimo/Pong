@@ -10,24 +10,24 @@ namespace math
         public:
             // constructors
             Vector2();
-            Vector2(const real x, const real y);
+            Vector2(real x, real y);
             Vector2(const Vector2 &rhs);
 
             // functions
             void Normalize();
-            void SetXY(const real x, const real y);
-            void SetX(const real x);
-            void SetY(const real y);
-            void SetUnitLengthAndYawRadians(const real angleInRadians);
-            void SetUnitLengthAndYawDegrees(const real angleInDegrees);
-            void SetLengthAndYawRadians(const real radius, const real angleInRadians);
-            void SetLengthAndYawDegrees(const real radius, const real angleInDegrees);
-            void SetLength(const real radius);
-            void ScaleUniform(const real length);
-            void ScaleX(const real length);
-            void ScaleY(const real length);
-            Vector2& RotateDegrees(const real angleInDegrees);
-            Vector2& RotateRadians(const real angleInRadians);
+            void SetXY(real x, real y);
+            void SetX(real x);
+            void SetY(real y);
+            void SetUnitLengthAndYawRadians(real angleInRadians);
+            void SetUnitLengthAndYawDegrees(real angleInDegrees);
+            void SetLengthAndYawRadians(real radius, real angleInRadians);
+            void SetLengthAndYawDegrees(real radius, real angleInDegrees);
+            void SetLength(real radius);
+            void ScaleUniform(real length);
+            void ScaleX(real length);
+            void ScaleY(real length);
+            Vector2& RotateDegrees(real angleInDegrees);
+            Vector2& RotateRadians(real angleInRadians);
             Vector2& Rotate90Degrees();
             Vector2& RotateMinus90Degrees();
             Vector2& Reverse();
@@ -44,18 +44,18 @@ namespace math
             Vector2& operator=(const Vector2 &rhs);
             Vector2& operator+=(const Vector2 &rhs);
             Vector2& operator-=(const Vector2 &rhs);
-            Vector2& operator*=(const real uniformScale);
-            Vector2& operator/=(const real inverseScale);
+            Vector2& operator*=(real uniformScale);
+            Vector2& operator/=(real inverseScale);
             Vector2 operator+(const Vector2 &rhs);
             Vector2 operator+( const float displacement );
             Vector2 operator-(const Vector2 &rhs);
             Vector2 operator-( const float displacement );
-            Vector2 operator*(const real uniformScale);
-            Vector2 operator/(const real inverseScale);
+            Vector2 operator*(real uniformScale);
+            Vector2 operator/(real inverseScale);
             Vector2 operator-();
             bool operator==(const Vector2 &rhs);
             bool operator!=(const Vector2 &rhs);
-            friend Vector2 operator*(const real scale, const Vector2& rhs);
+            friend Vector2 operator*(real scale, const Vector2& rhs);
             
             real x;
             real y;

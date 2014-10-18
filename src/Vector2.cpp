@@ -12,7 +12,7 @@ namespace math
 
     }
     
-    Vector2::Vector2(const real _x, const real _y) : 
+    Vector2::Vector2(real _x, real _y) : 
         x(_x), y(_y) 
     {
     
@@ -34,7 +34,7 @@ namespace math
         this->y /= length;
     }
 
-    void Vector2::SetXY(const real _x, const real _y) 
+    void Vector2::SetXY(real _x, real _y) 
     {
         this->x = _x;
         this->y = _y;
@@ -51,53 +51,53 @@ namespace math
     }
 
     void Vector2::SetLengthAndYawRadians(
-        const real radius, 
-        const real angleInRadians) 
+        real radius, 
+        real angleInRadians) 
     {
         this->x = radius * cos(angleInRadians);
         this->y = radius * sin(angleInRadians);
     }
 
-    void Vector2::SetUnitLengthAndYawRadians(const real angleInRadians) 
+    void Vector2::SetUnitLengthAndYawRadians(real angleInRadians) 
     {
         SetLengthAndYawRadians(1, angleInRadians);
     }
 
-    void Vector2::SetUnitLengthAndYawDegrees(const real angleInDegrees) 
+    void Vector2::SetUnitLengthAndYawDegrees(real angleInDegrees) 
     {
         SetLengthAndYawRadians(1, ToRadians(angleInDegrees));
     }
 
     void Vector2::SetLengthAndYawDegrees(
-        const real radius, 
-        const real angleInDegrees) 
+        real radius, 
+        real angleInDegrees) 
     {
         SetLengthAndYawRadians(radius, ToRadians(angleInDegrees));
     }
 
-    void Vector2::SetLength(const real radius)  
+    void Vector2::SetLength(real radius)  
     {
         real angle = this->CalcYawRadians();
         SetLengthAndYawRadians(radius, angle);
     }
 
-    void Vector2::ScaleUniform(const real length) 
+    void Vector2::ScaleUniform(real length) 
     {
         this->x *= length;
         this->y *= length;
     }
 
-    void Vector2::ScaleX(const real length) 
+    void Vector2::ScaleX(real length) 
     {
         this->x *= length;
     }
 
-    void Vector2::ScaleY(const real length) 
+    void Vector2::ScaleY(real length) 
     {
         this->y *= length;
     }
 
-    Vector2& Vector2::RotateRadians(const real angleInRadians) 
+    Vector2& Vector2::RotateRadians(real angleInRadians) 
     {
         real cosangle = cos(angleInRadians);
         real sinangle = sin(angleInRadians);
@@ -108,7 +108,7 @@ namespace math
         return *this;
     }
 
-    Vector2& Vector2::RotateDegrees(const real angleInDegrees) 
+    Vector2& Vector2::RotateDegrees(real angleInDegrees) 
     {
         return RotateRadians(ToRadians(angleInDegrees));
     }
@@ -197,14 +197,14 @@ namespace math
         return *this;
     }
 
-    Vector2 & Vector2::operator*=(const real uniformScale) 
+    Vector2 & Vector2::operator*=(real uniformScale) 
     {
         this->x *= uniformScale;
         this->y *= uniformScale;
         return *this;
     }
 
-    Vector2 & Vector2::operator/=(const real inverseScale)  
+    Vector2 & Vector2::operator/=(real inverseScale)  
     {
         if(inverseScale == 0) {
             throw std::overflow_error("Divide by zero exception");
@@ -240,12 +240,12 @@ namespace math
         return res;
     }
 
-    Vector2 Vector2::operator*(const real uniformScale) 
+    Vector2 Vector2::operator*(real uniformScale) 
     {
         return Vector2(this->x * uniformScale, this->y * uniformScale);
     }
 
-    Vector2 Vector2::operator/(const real inverseScale) 
+    Vector2 Vector2::operator/(real inverseScale) 
     {
         if(inverseScale == 0) {
             throw std::overflow_error("Divide by zero exception");
@@ -268,7 +268,7 @@ namespace math
         return !(*this == rhs);
     }
 
-    Vector2 operator*(const real scale, const Vector2& rhs) 
+    Vector2 operator*(real scale, const Vector2& rhs) 
     {
         return Vector2(scale * rhs.x, scale * rhs.y);
     }

@@ -20,13 +20,12 @@ namespace pong
 
     }
 
-    void Player::MoveVertical(const float dy, 
-        const float minY, const float maxY)
+    void Player::MoveVertical(float dy, float minY, float maxY)
     {
         m_paddle.MoveVertical(dy, minY, maxY);
     }
 
-    void Player::UpdateScore(const int score)
+    void Player::UpdateScore(int score)
     {
         m_score += score;
     }
@@ -36,7 +35,7 @@ namespace pong
         return m_score;
     }
 
-    Paddle& Player::GetPaddle()
+    const Paddle& Player::GetPaddle()
     {
         return m_paddle;
     }

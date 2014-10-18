@@ -12,12 +12,12 @@ namespace pong
             // ctor & dtor
             Paddle();
             Paddle(const math::Vector2 topleft, 
-                const float width, const float height);
+                float width, float height);
             ~Paddle();
             
             // functions
-            void MoveVertical(const float dy, 
-                const float minY, const float maxY);
+            void MoveVertical(float dy, 
+                float minY, float maxY);
 
             float GetWidth() const;
             float GetHeight() const;
