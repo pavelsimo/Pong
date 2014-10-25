@@ -2,6 +2,8 @@
 #include <iostream>
 
 const int DIGIT_SPACE_OFFSET = 31;
+const int DIGIT_WIDTH = 30;
+const int DIGIT_HEIGHT = 42;
 
 ScoreBar::ScoreBar(int score, Texture *texture)
 : m_score(score),
@@ -18,16 +20,16 @@ ScoreBar::~ScoreBar()
 void ScoreBar::InitializeNumbers()
 {
     // digit clip rectangle
-    m_clipRegion[0] = draw::Rect(591, 29, 30, 42);
-    m_clipRegion[1] = draw::Rect(638, 29, 30, 42);
-    m_clipRegion[2] = draw::Rect(670, 29, 30, 42);
-    m_clipRegion[3] = draw::Rect(715, 29, 30, 42);
-    m_clipRegion[4] = draw::Rect(756, 29, 30, 42);
-    m_clipRegion[5] = draw::Rect(804, 29, 30, 42);
-    m_clipRegion[6] = draw::Rect(846, 29, 30, 42);
-    m_clipRegion[7] = draw::Rect(891, 29, 30, 42);
-    m_clipRegion[8] = draw::Rect(936, 29, 30, 42);
-    m_clipRegion[9] = draw::Rect(981, 29, 30, 42);
+    m_clipRegion[0] = draw::Rect(591, 29, DIGIT_WIDTH, DIGIT_HEIGHT);
+    m_clipRegion[1] = draw::Rect(638, 29, DIGIT_WIDTH, DIGIT_HEIGHT);
+    m_clipRegion[2] = draw::Rect(670, 29, DIGIT_WIDTH, DIGIT_HEIGHT);
+    m_clipRegion[3] = draw::Rect(715, 29, DIGIT_WIDTH, DIGIT_HEIGHT);
+    m_clipRegion[4] = draw::Rect(756, 29, DIGIT_WIDTH, DIGIT_HEIGHT);
+    m_clipRegion[5] = draw::Rect(804, 29, DIGIT_WIDTH, DIGIT_HEIGHT);
+    m_clipRegion[6] = draw::Rect(846, 29, DIGIT_WIDTH, DIGIT_HEIGHT);
+    m_clipRegion[7] = draw::Rect(891, 29, DIGIT_WIDTH, DIGIT_HEIGHT);
+    m_clipRegion[8] = draw::Rect(936, 29, DIGIT_WIDTH, DIGIT_HEIGHT);
+    m_clipRegion[9] = draw::Rect(981, 29, DIGIT_WIDTH, DIGIT_HEIGHT);
 }
 
 void ScoreBar::SetScore(int score)
