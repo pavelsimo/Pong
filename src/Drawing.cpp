@@ -99,5 +99,32 @@ namespace draw
         }
     }
 
+    void DrawText(
+        GLfloat x, GLfloat y, 
+        const std::string &text,
+        BitmapFont* font,
+        GLfloat xOffset,
+        GLfloat yOffset
+    ) 
+    {
+        GLuint texId = font->GetTexture()->GetTexId();
+        GLuint imgWidth = font->GetTexture()->GetImgWidth();
+        GLuint imgHeight = font->GetTexture()->GetImgHeight();
+        GLuint texWidth = font->GetTexture()->GetTexWidth();
+        GLuint texHeight = font->GetTexture()->GetTexHeight();
+
+        for(int i = 0; i < text.size(); ++i)
+        {
+            Rect clip = font->GetCharacter(text[i]);
+            DrawTexture(
+                x + i * xOffset, y,
+                texId,
+                imgWidth, imgHeight,
+                texWidth, texHeight,
+                &clip
+            );
+        }
+    }
+
 }
 

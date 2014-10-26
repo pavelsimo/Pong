@@ -24,7 +24,7 @@ bool InitializeGL()
     glViewport(0.f, 0.f, g_world->GetWidth(), g_world->GetHeight());
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(g_world->GetLeft(), g_world->GetRight(), 
+    glOrtho(g_world->GetLeft(), g_world->GetRight(),
         g_world->GetBottom(), g_world->GetTop(), 1.0, -1.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -34,7 +34,7 @@ bool InitializeGL()
     glEnable(GL_TEXTURE_2D);
 
     GLenum error = glGetError();
-    if (error !=  GL_NO_ERROR ) 
+    if (error !=  GL_NO_ERROR )
     {
         std::cout << "Error initializing OpenGL! " << gluErrorString(error) << std::endl;
         return false;
@@ -100,7 +100,7 @@ int main(int argc, char** argv)
     glutCreateWindow("Pong");
     glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION);
 
-    if(!InitializeGL()) 
+    if(!InitializeGL())
     {
         std::cout << "Unable to initalize OpenGL." << std::endl;
     }
@@ -121,7 +121,7 @@ int main(int argc, char** argv)
     if(g_world != nullptr)
     {
         delete g_world;
-        g_world = nullptr;    
+        g_world = nullptr;
     }
 
     return 0;

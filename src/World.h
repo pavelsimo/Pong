@@ -10,6 +10,7 @@
 #include "Texture.h"
 #include "Sound.h"
 #include "ScoreBar.h"
+#include "MainBitmapFont.h"
 
 namespace pong
 {
@@ -81,12 +82,13 @@ namespace pong
             Player m_player2;
             math::Vector2 m_velBall;
             math::Vector2 m_mousePos;
-            ScoreBar* m_scorePlayer1;
-            ScoreBar* m_scorePlayer2;
             Texture* m_texBanner;
             Texture* m_texFonts;
             Sound* m_sndTheme;
             Sound* m_sndBallHitPaddle;
+
+            MainBitmapFont* m_bitmapFont;
+
     };
 }
 

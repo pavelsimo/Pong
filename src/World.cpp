@@ -39,10 +39,9 @@ namespace pong
       m_state(IDLE),
       m_texBanner(nullptr),
       m_texFonts(nullptr),
-      m_scorePlayer1(nullptr),
-      m_scorePlayer2(nullptr),
       m_sndTheme(nullptr),
-      m_sndBallHitPaddle(nullptr)
+      m_sndBallHitPaddle(nullptr),
+      m_bitmapFont(nullptr)
     {
 
     }
@@ -83,7 +82,7 @@ namespace pong
         {
             if(LoadResources())
             {
-                // ...
+
             }
         }
         else if(m_state == PLAYING)
@@ -104,12 +103,10 @@ namespace pong
             if(HasBallCollideLeft())
             {
                 m_player2.UpdateScore(1);
-                m_scorePlayer2->SetScore(m_player2.GetScore());
             }
             else if(HasBallCollideRight())
             {
                 m_player1.UpdateScore(1);
-                m_scorePlayer1->SetScore(m_player1.GetScore());
             }
             Restart();
         }
@@ -274,16 +271,15 @@ namespace pong
         // TODO: (Pavel) fix the issue when users load the game from 
         // a different directory (e.g. ../bin/Pong)
 
+        if(m_bitmapFont == nullptr)
+        {
+            m_bitmapFont = new MainBitmapFont();
+            m_bitmapFont->LoadBitmap("fonts/MainFont_EN_00.png");
+        }
+
         if(m_texBanner == nullptr)
         {
             LoadBannerTexture("images/pong_banner.png");
-        }
-
-        if(m_texFonts == nullptr)
-        {
-            LoadFontTexture("fonts/MainFont_EN_00.png");
-            m_scorePlayer1 = new ScoreBar(0, m_texFonts);
-            m_scorePlayer2 = new ScoreBar(0, m_texFonts);
         }
 
         // TODO: (Pavel) This sound class is horrible...
@@ -323,20 +319,6 @@ namespace pong
             m_texFonts = nullptr;
         }
 
-        // clean m_scorePlayer1
-        if(m_scorePlayer1 != nullptr)
-        {
-            delete m_scorePlayer1;
-            m_scorePlayer1 = nullptr;
-        }
-
-        // clean m_scorePlayer2
-        if(m_scorePlayer2 != nullptr)
-        {
-            delete m_scorePlayer2;
-            m_scorePlayer2 = nullptr;
-        }
-
         // clean sound theme
         if(m_sndTheme != nullptr) 
         {
@@ -349,6 +331,12 @@ namespace pong
         {
             delete m_sndTheme;
             m_sndTheme = nullptr;
+        }
+
+        if(m_bitmapFont != nullptr)
+        {
+            delete m_bitmapFont;
+            m_bitmapFont = nullptr;
         }
     }
 
@@ -364,13 +352,24 @@ namespace pong
 
     void World::DrawScore()
     {
-        m_scorePlayer1->Render(m_width / 2 - 200, 50);
-        m_scorePlayer2->Render(m_width / 2 + 200 - 30, 50);
+        std::string player1ScoreStr = std::to_string(m_player1.GetScore());
+        std::string player2ScoreStr = std::to_string(m_player2.GetScore());
+
+        draw::DrawText(
+            m_width / 2 - 200, 50, 
+            player1ScoreStr,
+            m_bitmapFont->GetBitmapFont()
+        );
+
+        draw::DrawText(
+            m_width / 2 + 200 - 30, 50, 
+            player2ScoreStr,
+            m_bitmapFont->GetBitmapFont()
+        );
     }
 
     void World::DrawBanner()
     {
-        // TODO: (Pavel) add method DrawBanner()
         draw::DrawTexture(
                 m_width * 0.5f - m_texBanner->GetTexWidth() * 0.5f,
                 m_height * 0.5f - m_texBanner->GetTexHeight() * 0.5f,

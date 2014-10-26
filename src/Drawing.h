@@ -2,7 +2,9 @@
 #define DRAWING_H
 
 #include "LOpenGL.h"
+#include "Rect.h"
 #include "Vector2.h"
+#include "BitmapFont.h"
 
 namespace draw
 {
@@ -10,26 +12,6 @@ namespace draw
         SOLID, 
         DOTTED = 0x0101, 
         DASHED = 0x00FF 
-    };
-
-    struct Rect 
-    {
-        Rect()
-        : x(0), y(0), w(0), h(0)
-        {
-
-        }
-
-        Rect(GLfloat _x, GLfloat _y, GLfloat _w, GLfloat _h)
-        : x(_x), y(_y), w(_w), h(_h)
-        {
-
-        }
-
-        GLfloat x; 
-        GLfloat y; 
-        GLfloat w; 
-        GLfloat h; 
     };
 
     void DrawLine( 
@@ -50,6 +32,14 @@ namespace draw
         GLuint imgWidth, GLuint imgHeight, 
         GLuint texWidth, GLuint texHeight,
         Rect* clip = NULL
+    );
+
+    void DrawText(
+        GLfloat x, GLfloat y,
+        const std::string &text,
+        BitmapFont* font,
+        GLfloat xOffset = 32,
+        GLfloat yOffset = 0
     );
 }
 

@@ -25,7 +25,6 @@ class Texture
         GLuint GetImgHeight();
         GLuint* GetTexPixels();
     private:
-        // TODO: (Pavel) move to math utilities
         GLuint NearestPower2(GLuint n);
 
         GLuint m_texId;

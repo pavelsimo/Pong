@@ -71,6 +71,8 @@ ADD_EXECUTABLE(
     ${PROJECT_NAME}
     src/main.cpp
     src/Player.cpp 
+    src/BitmapFont.cpp
+    src/MainBitmapFont.cpp
     src/Ball.cpp
     src/World.cpp
     src/Paddle.cpp
