@@ -7,22 +7,22 @@
 
 class MainBitmapFont
 {
-	public:
-		// ctor & dtor
-		MainBitmapFont();
-		MainBitmapFont(GLfloat width, GLfloat height);
-		~MainBitmapFont();
+    public:
+        // ctor & dtor
+        MainBitmapFont();
+        MainBitmapFont(GLfloat width, GLfloat height);
+        ~MainBitmapFont();
 
-		// methods
-		bool LoadBitmap(const std::string& filename);
-		void Initialize();
-		void Clean();
-		BitmapFont* GetBitmapFont();
-		
-	private:
-		GLfloat m_width;
-		GLfloat m_height;
-		BitmapFont* m_bitmapFont;
+        // methods
+        bool LoadBitmap(const std::string& filename);
+        void Initialize();
+        void Clean();
+        BitmapFont* GetBitmapFont();
+        
+    private:
+        GLfloat m_width;
+        GLfloat m_height;
+        BitmapFont* m_bitmapFont;
 };
 
 
