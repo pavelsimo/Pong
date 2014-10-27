@@ -5,7 +5,7 @@
 #include "BitmapFont.h"
 #include <string>
 
-class MainBitmapFont
+class MainBitmapFont : public BitmapFont
 {
     public:
         // ctor & dtor
@@ -16,8 +16,6 @@ class MainBitmapFont
         // methods
         bool LoadBitmap(const std::string& filename);
         void Initialize();
-        void Clean();
-        BitmapFont* GetBitmapFont();
         
     private:
         GLfloat m_width;

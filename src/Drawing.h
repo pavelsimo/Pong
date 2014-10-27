@@ -38,8 +38,9 @@ namespace draw
         GLfloat x, GLfloat y,
         const std::string &text,
         BitmapFont* font,
-        GLfloat xOffset = 32,
-        GLfloat yOffset = 0
+        GLfloat glyphOffset = 3,
+        GLfloat spaceOffset = 32,
+        GLfloat lineSeparatorOffset = 100
     );
 }
 

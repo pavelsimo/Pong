@@ -103,8 +103,9 @@ namespace draw
         GLfloat x, GLfloat y, 
         const std::string &text,
         BitmapFont* font,
-        GLfloat xOffset,
-        GLfloat yOffset
+        GLfloat glyphOffset,
+        GLfloat spaceOffset,
+        GLfloat lineSeparatorOffset
     ) 
     {
         GLuint texId = font->GetTexture()->GetTexId();
@@ -113,16 +114,32 @@ namespace draw
         GLuint texWidth = font->GetTexture()->GetTexWidth();
         GLuint texHeight = font->GetTexture()->GetTexHeight();
 
+        GLfloat curX = x;
+        GLfloat curY = y;
         for(int i = 0; i < text.size(); ++i)
         {
+            if(text[i] == '\n' || text[i] == '\r')
+            {
+                curX = x;
+                curY += lineSeparatorOffset;
+                continue;
+            }
+
+            if(isspace(text[i])) {
+                curX += spaceOffset;
+                continue;
+            }
+
             Rect clip = font->GetCharacter(text[i]);
             DrawTexture(
-                x + i * xOffset, y,
+                curX, curY,
                 texId,
                 imgWidth, imgHeight,
                 texWidth, texHeight,
                 &clip
             );
+
+            curX += clip.w + glyphOffset;
         }
     }
 

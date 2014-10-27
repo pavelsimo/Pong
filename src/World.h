@@ -9,7 +9,6 @@
 #include "Drawing.h"
 #include "Texture.h"
 #include "Sound.h"
-#include "ScoreBar.h"
 #include "MainBitmapFont.h"
 
 namespace pong

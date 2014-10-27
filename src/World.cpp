@@ -57,6 +57,13 @@ namespace pong
         {
             if(m_texBanner != nullptr && m_texBanner->GetTexId() != 0)
             {
+                /*
+                draw::DrawText(
+                        20, 20,
+                        "ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123456789\nCLICK TO START",
+                        m_bitmapFont
+                );
+                */
                 DrawBanner();
             }
         }
@@ -358,13 +365,13 @@ namespace pong
         draw::DrawText(
             m_width / 2 - 200, 50, 
             player1ScoreStr,
-            m_bitmapFont->GetBitmapFont()
+            m_bitmapFont
         );
 
         draw::DrawText(
             m_width / 2 + 200 - 30, 50, 
             player2ScoreStr,
-            m_bitmapFont->GetBitmapFont()
+            m_bitmapFont
         );
     }
 

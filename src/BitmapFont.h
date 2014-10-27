@@ -12,13 +12,13 @@ class BitmapFont
     public:
         // ctor & dtor
         BitmapFont();
-        ~BitmapFont();
+        virtual ~BitmapFont();
 
         // methods
         void AddCharacter(unsigned int ch, GLfloat x, GLfloat y, GLfloat w, GLfloat h);
         void AddCharacter(unsigned int ch, Rect rect);
         void RemoveCharacter(unsigned int ch);
-        bool LoadBitmap(const std::string& filename);
+        virtual bool LoadBitmap(const std::string& filename);
         Rect GetCharacter(unsigned int ch);
         Texture* GetTexture();
         void Clean();
