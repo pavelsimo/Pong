@@ -18,7 +18,6 @@ bool Sound::LoadFromFile(const char* filename)
 {
 
     m_buffer = alutCreateBufferFromFile(filename);
-    std::cout << m_buffer << std::endl;
 
     if ( alutGetError() != ALUT_ERROR_NO_ERROR )
     {
@@ -32,11 +31,10 @@ bool Sound::LoadFromFile(const char* filename)
         std::cout << "Unable to generate the source." << std::endl;
         return false;
     }
-    std::cout << m_source << std::endl;
+    
     alSourcei(m_source, AL_BUFFER, m_buffer);
 
     /*
-
     // The version of ALUT that ships with OS X 10.4 
     // and earlier is fairly old, and does not include the 
     // alutCreateBufferHelloWorld or alutCreateBufferFromFile 

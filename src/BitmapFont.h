@@ -15,17 +15,17 @@ class BitmapFont
         virtual ~BitmapFont();
 
         // methods
-        void AddCharacter(unsigned int ch, GLfloat x, GLfloat y, GLfloat w, GLfloat h);
-        void AddCharacter(unsigned int ch, Rect rect);
-        void RemoveCharacter(unsigned int ch);
         virtual bool LoadBitmap(const std::string& filename);
-        Rect GetCharacter(unsigned int ch);
+        void AddCharacter(unsigned int glyph, GLfloat x, GLfloat y, GLfloat w, GLfloat h);
+        void AddCharacter(unsigned int glyph, Rect rect);
+        void RemoveCharacter(unsigned int ch);
+        Rect GetCharacter(unsigned int glyph);
         Texture* GetTexture();
         void Clean();
         
     private:
         Texture* m_texture;
-        std::map<unsigned int, Rect> m_characters;
+        std::map<unsigned int, Rect> m_glyphs;
 };
 
 #endif

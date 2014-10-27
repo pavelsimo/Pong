@@ -2,15 +2,6 @@
 
 
 MainBitmapFont::MainBitmapFont()
-: m_width(30),
-  m_height(42)
-{
-    
-}
-
-MainBitmapFont::MainBitmapFont(GLfloat width, GLfloat height)
-: m_width(width),
-  m_height(height)
 {
     
 }
@@ -32,16 +23,16 @@ void MainBitmapFont::Initialize()
     // TODO: (Pavel) this should be configuration
 
     // numbers
-    AddCharacter('0', 591, 29, m_width, m_height);
-    AddCharacter('1', 638, 29, 22, m_height);
-    AddCharacter('2', 670, 29, m_width, m_height);
-    AddCharacter('3', 715, 29, m_width, m_height);
-    AddCharacter('4', 756, 29, m_width, m_height);
-    AddCharacter('5', 804, 29, m_width, m_height);
-    AddCharacter('6', 846, 29, m_width, m_height);
-    AddCharacter('7', 891, 29, m_width, m_height);
-    AddCharacter('8', 936, 29, m_width, m_height);
-    AddCharacter('9', 981, 29, m_width, m_height);
+    AddCharacter('0', 591, 29, 30, 42);
+    AddCharacter('1', 638, 29, 22, 42);
+    AddCharacter('2', 670, 29, 30, 42);
+    AddCharacter('3', 715, 29, 30, 42);
+    AddCharacter('4', 756, 29, 30, 42);
+    AddCharacter('5', 804, 29, 30, 42);
+    AddCharacter('6', 846, 29, 30, 42);
+    AddCharacter('7', 891, 29, 30, 42);
+    AddCharacter('8', 936, 29, 30, 42);
+    AddCharacter('9', 981, 29, 30, 42);
 
     // uppercase letters
     AddCharacter('A', 290, 117, 37, 51);
@@ -98,5 +89,4 @@ void MainBitmapFont::Initialize()
     AddCharacter('x', 748, 290, 30, 55);
     AddCharacter('y', 796, 290, 30, 55);
     AddCharacter('z', 845, 290, 27, 55);
-
 }

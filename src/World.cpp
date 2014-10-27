@@ -38,7 +38,6 @@ namespace pong
       m_velBall(math::Vector2(BALL_SPEED, BALL_SPEED)),
       m_state(IDLE),
       m_texBanner(nullptr),
-      m_texFonts(nullptr),
       m_sndTheme(nullptr),
       m_sndBallHitPaddle(nullptr),
       m_bitmapFont(nullptr)
@@ -57,14 +56,14 @@ namespace pong
         {
             if(m_texBanner != nullptr && m_texBanner->GetTexId() != 0)
             {
-                /*
+                
                 draw::DrawText(
                         20, 20,
                         "ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123456789\nCLICK TO START",
                         m_bitmapFont
                 );
-                */
-                DrawBanner();
+                
+                //DrawBanner();
             }
         }
         else if(m_state == PLAYING)
@@ -319,13 +318,6 @@ namespace pong
             m_texBanner = nullptr;
         }
 
-        // clean m_texFonts
-        if(m_texFonts != nullptr)
-        {
-            delete m_texFonts;
-            m_texFonts = nullptr;
-        }
-
         // clean sound theme
         if(m_sndTheme != nullptr) 
         {
@@ -411,18 +403,6 @@ namespace pong
         {
             m_texBanner = new Texture();
             if(!m_texBanner->LoadFromFile(path))
-            {
-                std::cout << "Unable to load the texture" << '\n';
-            }
-        }
-    }
-
-    bool World::LoadFontTexture(const std::string& path)
-    {
-        if(m_texFonts == nullptr)
-        {
-            m_texFonts = new Texture();
-            if(!m_texFonts->LoadFromFile(path))
             {
                 std::cout << "Unable to load the texture" << '\n';
             }

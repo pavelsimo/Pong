@@ -68,7 +68,6 @@ namespace pong
             void ChangeState(GameState state);
             void Restart();
             bool LoadBannerTexture(const std::string& path);
-            bool LoadFontTexture(const std::string& path);
 
             // helpers
             void DrawPlayerPaddle(Player& player);
@@ -82,12 +81,9 @@ namespace pong
             math::Vector2 m_velBall;
             math::Vector2 m_mousePos;
             Texture* m_texBanner;
-            Texture* m_texFonts;
             Sound* m_sndTheme;
             Sound* m_sndBallHitPaddle;
-
-            MainBitmapFont* m_bitmapFont;
-
+            BitmapFont* m_bitmapFont;
     };
 }
 
