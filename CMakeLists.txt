@@ -81,7 +81,6 @@ ADD_EXECUTABLE(
     src/Drawing.cpp
     src/MathUtilities.cpp
     src/Texture.cpp
-    src/ScoreBar.cpp
     src/Sound.cpp
 )
 
