@@ -16,11 +16,9 @@ class MainBitmapFont : public BitmapFont
         // methods
         bool LoadBitmap(const std::string& filename);
         void Initialize();
-        
     private:
         GLfloat m_width;
         GLfloat m_height;
-        BitmapFont* m_bitmapFont;
 };
 
 
