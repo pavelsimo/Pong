@@ -56,14 +56,7 @@ namespace pong
         {
             if(m_texBanner != nullptr && m_texBanner->GetTexId() != 0)
             {
-                
-                draw::DrawText(
-                        20, 20,
-                        "ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123456789\nCLICK TO START",
-                        m_bitmapFont
-                );
-                
-                //DrawBanner();
+                DrawBanner();
             }
         }
         else if(m_state == PLAYING)
