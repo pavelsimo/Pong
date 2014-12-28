@@ -31,7 +31,7 @@ namespace pong
 
             void Draw();
             void Update();
-			bool LoadResources();
+            bool LoadResources();
             void OnKeyDown(unsigned char key);
             void OnKeyUp(unsigned char key);
             void OnMouseMove(int x, int y);
@@ -42,7 +42,7 @@ namespace pong
             float GetRight() const;
             float GetBottom() const;
             float GetTop() const;
-			
+
         private:
 
             // ball

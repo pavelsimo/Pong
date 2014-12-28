@@ -399,10 +399,10 @@ namespace pong
             if(!m_texBanner->LoadFromFile(path))
             {
                 std::cout << "Unable to load the texture" << '\n';
-				return false;
+                return false;
             }
         }
-		return true;
+        return true;
     }
 
     // ==================

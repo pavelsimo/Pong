@@ -51,17 +51,15 @@ namespace pong
 
     void PongGame::OnRender()
     {
-		m_world->Draw();
+        m_world->Draw();
     }
 
     void PongGame::OnInit()
     {
-		
         if(!m_world->LoadResources())
         {
             std::cerr << "ERROR: Unable to load the game resources." << '\n';
         }
-		
     }
 
     void PongGame::OnMouseMotion(SDL_MouseMotionEvent &event)

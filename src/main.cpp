@@ -9,15 +9,15 @@ int main(int argc, char *argv[])
 {
     alutInit (&argc, argv);
 
-	pong::PongGame* game = new pong::PongGame(SCREEN_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT);
+    pong::PongGame* game = new pong::PongGame(SCREEN_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT);
     game->Run();
 
-	if (game != nullptr)
-	{
-		delete game;
-		game = nullptr;
-	}
-	
+    if (game != nullptr)
+    {
+        delete game;
+        game = nullptr;
+    }
+
     alutExit();
 
     return 0;
