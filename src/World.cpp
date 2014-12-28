@@ -1,5 +1,6 @@
 #include "World.h"
 #include <iostream>
+#include <sstream>
 
 namespace pong
 {
@@ -344,8 +345,8 @@ namespace pong
 
     void World::DrawScore()
     {
-        std::string player1ScoreStr = std::to_string(m_player1.GetScore());
-        std::string player2ScoreStr = std::to_string(m_player2.GetScore());
+        std::string player1ScoreStr = NumberToString(m_player1.GetScore());
+        std::string player2ScoreStr = NumberToString(m_player2.GetScore());
 
         draw::DrawText(
             m_width / 2 - 200, 50, 
@@ -363,13 +364,13 @@ namespace pong
     void World::DrawBanner()
     {
         draw::DrawTexture(
-                m_width * 0.5f - m_texBanner->GetTexWidth() * 0.5f,
-                m_height * 0.5f - m_texBanner->GetTexHeight() * 0.5f,
-                m_texBanner->GetTexId(),
-                m_texBanner->GetImgWidth(),
-                m_texBanner->GetImgHeight(),
-                m_texBanner->GetTexWidth(),
-                m_texBanner->GetTexHeight()
+            m_width * 0.5f - m_texBanner->GetTexWidth() * 0.5f,
+            m_height * 0.5f - m_texBanner->GetTexHeight() * 0.5f,
+            m_texBanner->GetTexId(),
+            m_texBanner->GetImgWidth(),
+            m_texBanner->GetImgHeight(),
+            m_texBanner->GetTexWidth(),
+            m_texBanner->GetTexHeight()
         );
     }
 
@@ -398,8 +399,10 @@ namespace pong
             if(!m_texBanner->LoadFromFile(path))
             {
                 std::cout << "Unable to load the texture" << '\n';
+				return false;
             }
         }
+		return true;
     }
 
     // ==================

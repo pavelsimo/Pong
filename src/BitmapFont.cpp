@@ -21,6 +21,8 @@ bool BitmapFont::LoadBitmap(const std::string& filename)
         m_texture = new Texture();
         m_texture->LoadFromFile(filename);      
     }
+
+	return true;
 }
 
 void BitmapFont::AddCharacter(unsigned int glyph, GLfloat x, GLfloat y, GLfloat w, GLfloat h)

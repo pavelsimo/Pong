@@ -1,6 +1,8 @@
 #ifndef WORLD_H
 #define WORLD_H
 
+#include <sstream>
+
 #include "LOpenGL.h"
 #include "Vector2.h"
 #include "Ball.h"
@@ -29,6 +31,7 @@ namespace pong
 
             void Draw();
             void Update();
+			bool LoadResources();
             void OnKeyDown(unsigned char key);
             void OnKeyUp(unsigned char key);
             void OnMouseMove(int x, int y);
@@ -39,8 +42,11 @@ namespace pong
             float GetRight() const;
             float GetBottom() const;
             float GetTop() const;
+			
         private:
+
             // ball
+            //
             void UpdateBall();
             void DrawBall();
             bool HasBallCollideTop() const;
@@ -50,17 +56,19 @@ namespace pong
             bool IsBallInBounds() const;
 
             // player 1 (AI)
+            //
             void UpdatePlayer1();
             void DrawPlayer1();
             bool HasPlayer1Score();
 
             // player 2 (You)
+            //
             void UpdatePlayer2();
             void DrawPlayer2();
             bool HasPlayer2Score();
 
             // game ui
-            bool LoadResources();
+            //
             void CleanResources();
             void DrawPlayField();
             void DrawScore();
@@ -68,9 +76,6 @@ namespace pong
             void ChangeState(GameState state);
             void Restart();
             bool LoadBannerTexture(const std::string& path);
-
-            // helpers
-            void DrawPlayerPaddle(Player& player);
 
             GameState m_state;
             float m_width;
@@ -84,6 +89,19 @@ namespace pong
             Sound* m_sndTheme;
             Sound* m_sndBallHitPaddle;
             BitmapFont* m_bitmapFont;
+
+            // helpers
+            //
+            void DrawPlayerPaddle(Player& player);
+
+            // TODO: (Pavel) Move this to an utility class
+            template <typename T>
+            std::string NumberToString ( T Number )
+            {
+                std::ostringstream ss;
+                ss << Number;
+                return ss.str();
+            }
     };
 }
 
