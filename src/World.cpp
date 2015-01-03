@@ -10,7 +10,7 @@ namespace pong
     const float BALL_VEL_MULT = 1;
     const float PADDLE_WIDTH = 20;
     const float PADDLE_HEIGHT = 80;
-    const float DRAG = 0.2;
+    const float DRAG = 0.2f;
     const float LINE_WIDTH = 4;
 
     World::World()
@@ -124,8 +124,8 @@ namespace pong
 
     void World::OnMouseMove(int x, int y)
     {
-        m_mousePos.x = x;
-        m_mousePos.y = y;
+        m_mousePos.x = static_cast<float>(x);
+        m_mousePos.y = static_cast<float>(y);
     }
 
     void World::OnMouseClick(int button, int state, int x, int y)

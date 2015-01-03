@@ -4,7 +4,7 @@
 #include <cmath>
 #include <cstdint>
 
-#define PI 3.14159
+#define PI 3.14159f
 
 typedef float real;
 typedef int32_t int32;

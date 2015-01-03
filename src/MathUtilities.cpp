@@ -3,26 +3,29 @@
 
 namespace math {
 
-    const real EPS = 1e-6;
+    const real EPS = 1e-6f;
 
     int32 ToNearestInt(real x) 
     {
-        return static_cast<int32>(x + 0.5);
+        return static_cast<int32>(x + 0.5f);
     }
 
     real ToRadians(real degrees) 
     {
-        return degrees * (PI / 180.0);
+        return degrees * (PI / 180.0f);
     }
 
     real ToDegrees(real rad) 
     {
-        return rad * (180.0 / PI);
+        return rad * (180.0f / PI);
     }
 
     boolean IsPowerOf2(int32 x) 
     {
-        if(x < 0) return false;
+        if (x < 0)
+        {
+            return false;
+        }
         return !((x - 1) & x);
     }
 
