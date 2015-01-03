@@ -11,8 +11,6 @@ Dependecies
 * DevIL
 * SDL2
 * Alut
-* xercesc
-* libxsd
 
 ---
 * On an **Unix based system**, you need to do your own house keeping and install these dependencies.
